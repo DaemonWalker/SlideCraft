@@ -1,0 +1,150 @@
+@charset "UTF-8";
+
+:root {
+  --p-blue: oklch(0.59 0.16 241);
+  --p-cyan: oklch(0.72 0.13 225);
+  --p-navy: oklch(0.25 0.055 240);
+  --p-orange: oklch(0.64 0.15 48);
+  --p-green: oklch(0.49 0.11 164);
+  --p-red: oklch(0.52 0.16 18);
+
+  --surface-app: oklch(0.935 0.014 235);
+  --surface-slide: oklch(0.99 0.004 235);
+  --surface-muted: oklch(0.965 0.009 235);
+  --surface-dark: var(--p-navy);
+  --surface-accent: oklch(0.92 0.045 235);
+  --surface-warning: oklch(0.94 0.04 70);
+  --surface-success: oklch(0.93 0.035 165);
+  --surface-danger: oklch(0.94 0.035 18);
+
+  --ink: oklch(0.27 0.045 240);
+  --ink-muted: oklch(0.39 0.035 240);
+  --on-dark: oklch(0.97 0.01 235);
+  --on-dark-muted: oklch(0.84 0.025 235);
+  --accent: var(--p-blue);
+  --accent-on-dark: var(--p-cyan);
+  --warning: var(--p-orange);
+  --success: var(--p-green);
+  --danger: var(--p-red);
+  --line: oklch(0.86 0.02 235);
+  --line-strong: oklch(0.8 0.025 235);
+  --line-dark: oklch(0.42 0.05 240);
+
+  --font-sans: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", Arial, sans-serif;
+  --font-code: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  --radius-control: 8px;
+  --radius-panel: 16px;
+  --radius-slide: 14px;
+  --shadow-slide: 0 18px 56px oklch(0.25 0.055 240 / 0.14);
+  color-scheme: light;
+  font-family: var(--font-sans);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#app {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100dvh;
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--surface-app);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  border: 0;
+  color: inherit;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+}
+
+button:focus-visible,
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--p-cyan);
+  outline-offset: 3px;
+}
+
+button {
+  transition: color 160ms ease-out, background-color 160ms ease-out, border-color 160ms ease-out, transform 160ms ease-out, opacity 160ms ease-out;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+svg {
+  display: block;
+  flex: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--font-code);
+}
+
+::selection {
+  color: var(--on-dark);
+  background: var(--accent);
+}
+
+html[lang='ja'] {
+  --font-sans: "Yu Gothic", "Meiryo", "Hiragino Kaku Gothic ProN", "Noto Sans CJK JP", "Microsoft YaHei", sans-serif;
+}
+
+html[lang='ja'] .slide__title {
+  font-size: 56px;
+  letter-spacing: -0.025em;
+}
+
+html[lang='en'] .slide__title {
+  font-size: 54px;
+  letter-spacing: -0.025em;
+}
+
+html[lang='ja'] .slide__subtitle,
+html[lang='en'] .slide__subtitle {
+  font-size: 26px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}

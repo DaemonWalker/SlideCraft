@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">1920 × 1080 · 16:9 · scale ≤ 1</title>
+  <desc id="desc">16:9 · centered · scale ≤ 1</desc>
+  <rect width="1200" height="720" rx="24" fill="#f3f6f8"/>
+  <rect x="70" y="62" width="1060" height="596" rx="18" fill="#e2e9ee" stroke="#a9bac5" stroke-width="2"/>
+  <path d="M70 112h1060" stroke="#a9bac5" stroke-width="2"/>
+  <circle cx="110" cy="88" r="7" fill="#7d929f"/>
+  <circle cx="136" cy="88" r="7" fill="#7d929f"/>
+  <circle cx="162" cy="88" r="7" fill="#7d929f"/>
+  <rect x="190" y="148" width="820" height="461" rx="10" fill="#fbfcfd" stroke="#2388bd" stroke-width="4"/>
+  <rect x="238" y="198" width="170" height="18" rx="9" fill="#2388bd"/>
+  <rect x="238" y="252" width="470" height="34" rx="8" fill="#263f50"/>
+  <rect x="238" y="302" width="380" height="34" rx="8" fill="#263f50"/>
+  <rect x="238" y="382" width="320" height="150" rx="12" fill="#e5f2f8"/>
+  <rect x="584" y="382" width="378" height="150" rx="12" fill="#f0f4f6"/>
+  <text x="600" y="660" text-anchor="middle" fill="#415d6e" font-family="Cascadia Code, monospace" font-size="25">16:9 · centered · scale ≤ 1</text>
+  <text x="600" y="180" text-anchor="middle" fill="#2388bd" font-family="Cascadia Code, monospace" font-size="22">1920 × 1080</text>
+</svg>
