@@ -32,6 +32,12 @@
 
   --font-sans: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", Arial, sans-serif;
   --font-code: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  --code-keyword: oklch(0.78 0.13 310);
+  --code-string: oklch(0.81 0.12 155);
+  --code-comment: oklch(0.68 0.035 240);
+  --code-number: oklch(0.8 0.13 70);
+  --code-property: var(--p-cyan);
+  --code-tag: oklch(0.76 0.13 18);
   --radius-control: 8px;
   --radius-panel: 16px;
   --radius-slide: 14px;

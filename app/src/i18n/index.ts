@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 export const locales = ['zh-CN', 'ja', 'en'] as const
 export type Locale = typeof locales[number]
 
-type MessageValue = string | MessageValue[] | { [key: string]: MessageValue }
+type MessageValue = string | boolean | MessageValue[] | { [key: string]: MessageValue }
 type MessageTree = { [key: string]: MessageValue }
 
 const zhCN: MessageTree = {
@@ -107,12 +107,77 @@ const zhCN: MessageTree = {
         ],
         tags: ['统一主题', 'TypeScript 类型', 'Vue Slots 扩展', '固定画布适配'],
       },
+      'developer-code': {
+        title: '面向开发培训的代码表达',
+        section: '开发培训组件',
+        duration: '代码与配置',
+        notes: '展示 CodeBlock 的行号、指定行和错误行高亮，以及 CodeDiff、TerminalBlock 和 ConfigBlock 的组合方式。',
+        eyebrow: '04 · 代码与配置',
+        subtitle: '从源码、变更到命令输出和环境配置，保持一致的阅读体验。',
+        footer: '代码讲解组件',
+        configCaption: '应用环境配置',
+        configEntries: [
+          { key: 'APP_ENV', value: 'training', description: '标识当前运行环境。' },
+          { key: 'API_BASE_URL', value: 'http://localhost:8080', description: '本地开发服务的接口地址。' },
+          { key: 'DB_PASSWORD', value: 'local-only-password', sensitive: true, description: '敏感值默认掩码显示，不要在课件中放入真实密钥。' },
+        ],
+      },
+      'api-design': {
+        title: '把请求与响应放在同一页讲解',
+        section: '开发培训组件',
+        duration: '接口设计',
+        notes: '通过创建订单接口展示 RequestResponse，对照说明请求头、请求体、状态码和响应体。',
+        eyebrow: '05 · 接口设计',
+        subtitle: '对照展示 HTTP 方法、请求头、状态码和 JSON 消息体。',
+        footer: 'POST /api/orders',
+        caption: '创建订单：201 Created',
+        requestDescription: '提交客户编号和商品明细，创建一笔待处理订单。',
+      },
+      'system-diagrams': {
+        title: '用声明式数据描述系统结构',
+        section: '开发培训组件',
+        duration: '架构与时序',
+        notes: 'ArchitectureDiagram 使用逻辑坐标放置节点，SequenceDiagram 根据参与者和消息自动计算布局。',
+        eyebrow: '06 · 架构与时序',
+        subtitle: '架构图表达静态依赖，时序图表达一次调用的动态过程。',
+        footer: 'SVG · 离线渲染',
+        architecture: {
+          caption: '订单服务架构',
+          nodes: [
+            { id: 'client', title: 'Web 客户端', description: 'Vue 应用' },
+            { id: 'gateway', title: 'API 网关', description: '鉴权与路由' },
+            { id: 'orders', title: '订单服务', description: '业务处理' },
+            { id: 'queue', title: '消息队列', description: '订单事件' },
+            { id: 'database', title: '订单数据库', description: '持久化' },
+          ],
+          edges: [
+            { from: 'client', to: 'gateway', label: 'HTTPS' },
+            { from: 'gateway', to: 'orders', label: 'REST' },
+            { from: 'orders', to: 'queue', label: '发布事件', route: 'orthogonal' },
+            { from: 'orders', to: 'database', label: 'SQL', tone: 'success' },
+          ],
+        },
+        sequence: {
+          caption: '创建订单调用时序',
+          participants: [
+            { id: 'client', title: '客户端', tone: 'default' },
+            { id: 'orders', title: '订单服务', subtitle: 'Order API', tone: 'accent' },
+            { id: 'database', title: '数据库', subtitle: 'PostgreSQL', tone: 'success' },
+          ],
+          messages: [
+            { from: 'client', to: 'orders', label: 'POST /orders', type: 'sync' },
+            { from: 'orders', to: 'database', label: 'INSERT order', type: 'sync' },
+            { from: 'database', to: 'orders', label: 'orderId', type: 'return' },
+            { from: 'orders', to: 'client', label: '201 Created', type: 'return' },
+          ],
+        },
+      },
       scaling: {
         title: '只缩小，不放大',
         section: '核心设计',
         duration: '缩放规则',
         notes: '可用空间由外层容器测量，并扣除工具栏、导航栏和内边距。全屏时隐藏这些区域，让 1920 × 1080 屏幕可以实现 1:1 显示。',
-        eyebrow: '04 · 缩放策略',
+        eyebrow: '07 · 缩放策略',
         subtitle: '既保证小窗口完整显示，也避免大屏拉伸图片和文字。',
         footer: '最大缩放比例为 1',
         flow: [
@@ -129,7 +194,7 @@ const zhCN: MessageTree = {
         section: '开始使用',
         duration: '构建交付',
         notes: '制作新课件时复制 decks/demo，修改页面和注册信息。运行 npm run build:offline 后，dist/index.html 就是可发送的单文件版本。',
-        eyebrow: '05 · 从开发到交付',
+        eyebrow: '08 · 从开发到交付',
         heading: '一套框架，完成整个制作流程',
         subtitle: '源码保持组件化，交付保持简单。',
         steps: [
@@ -246,12 +311,77 @@ const ja: MessageTree = {
         ],
         tags: ['統一テーマ', 'TypeScript の型', 'Vue Slots による拡張', '固定キャンバス対応'],
       },
+      'developer-code': {
+        title: '開発者トレーニングのためのコード表現',
+        section: '開発者向けコンポーネント',
+        duration: 'コードと設定',
+        notes: 'CodeBlock の行番号、指定行とエラー行のハイライトに加え、CodeDiff、TerminalBlock、ConfigBlock の組み合わせを紹介します。',
+        eyebrow: '04 · コードと設定',
+        subtitle: 'ソース、差分、コマンド出力、環境設定を統一された見た目で表示します。',
+        footer: 'コード解説コンポーネント',
+        configCaption: 'アプリケーション環境設定',
+        configEntries: [
+          { key: 'APP_ENV', value: 'training', description: '現在の実行環境を識別します。' },
+          { key: 'API_BASE_URL', value: 'http://localhost:8080', description: 'ローカル開発サービスの API アドレスです。' },
+          { key: 'DB_PASSWORD', value: 'local-only-password', sensitive: true, description: '機密値は既定でマスクします。実際のキーは教材に含めないでください。' },
+        ],
+      },
+      'api-design': {
+        title: 'リクエストとレスポンスを1ページで解説',
+        section: '開発者向けコンポーネント',
+        duration: 'API 設計',
+        notes: '注文作成 API を例に RequestResponse を使い、ヘッダー、ボディ、ステータスコードを対比しながら説明します。',
+        eyebrow: '05 · API 設計',
+        subtitle: 'HTTP メソッド、ヘッダー、ステータスコード、JSON ボディを対比表示します。',
+        footer: 'POST /api/orders',
+        caption: '注文作成：201 Created',
+        requestDescription: '顧客 ID と商品明細を送信し、処理待ちの注文を作成します。',
+      },
+      'system-diagrams': {
+        title: '宣言的なデータでシステム構造を記述',
+        section: '開発者向けコンポーネント',
+        duration: 'アーキテクチャとシーケンス',
+        notes: 'ArchitectureDiagram は論理座標でノードを配置し、SequenceDiagram は参加者とメッセージから自動でレイアウトを計算します。',
+        eyebrow: '06 · アーキテクチャとシーケンス',
+        subtitle: '静的な依存関係はアーキテクチャ図、動的な呼び出しはシーケンス図で表現します。',
+        footer: 'SVG · オフライン描画',
+        architecture: {
+          caption: '注文サービスのアーキテクチャ',
+          nodes: [
+            { id: 'client', title: 'Web クライアント', description: 'Vue アプリ' },
+            { id: 'gateway', title: 'API ゲートウェイ', description: '認証とルーティング' },
+            { id: 'orders', title: '注文サービス', description: 'ビジネス処理' },
+            { id: 'queue', title: 'メッセージキュー', description: '注文イベント' },
+            { id: 'database', title: '注文データベース', description: '永続化' },
+          ],
+          edges: [
+            { from: 'client', to: 'gateway', label: 'HTTPS' },
+            { from: 'gateway', to: 'orders', label: 'REST' },
+            { from: 'orders', to: 'queue', label: 'イベント発行', route: 'orthogonal' },
+            { from: 'orders', to: 'database', label: 'SQL', tone: 'success' },
+          ],
+        },
+        sequence: {
+          caption: '注文作成の呼び出しシーケンス',
+          participants: [
+            { id: 'client', title: 'クライアント', tone: 'default' },
+            { id: 'orders', title: '注文サービス', subtitle: 'Order API', tone: 'accent' },
+            { id: 'database', title: 'データベース', subtitle: 'PostgreSQL', tone: 'success' },
+          ],
+          messages: [
+            { from: 'client', to: 'orders', label: 'POST /orders', type: 'sync' },
+            { from: 'orders', to: 'database', label: 'INSERT order', type: 'sync' },
+            { from: 'database', to: 'orders', label: 'orderId', type: 'return' },
+            { from: 'orders', to: 'client', label: '201 Created', type: 'return' },
+          ],
+        },
+      },
       scaling: {
         title: '縮小のみ、拡大はしない',
         section: 'コア設計',
         duration: '拡大縮小ルール',
         notes: '利用可能な領域は外側のコンテナで測定し、ツールバー、ナビゲーション、余白を差し引きます。全画面ではこれらを非表示にするため、1920 × 1080 の画面で 1:1 表示できます。',
-        eyebrow: '04 · 拡大縮小戦略',
+        eyebrow: '07 · 拡大縮小戦略',
         subtitle: '小さなウィンドウでは全体を表示し、大画面では画像と文字の引き伸ばしを防ぎます。',
         footer: '最大拡大率は 1',
         flow: [
@@ -268,7 +398,7 @@ const ja: MessageTree = {
         section: '使い始める',
         duration: 'ビルドと配布',
         notes: '新しい教材を作るときは decks/demo をコピーし、ページと登録情報を変更します。npm run build:offline を実行すると、配布できる dist/index.html が生成されます。',
-        eyebrow: '05 · 開発から配布まで',
+        eyebrow: '08 · 開発から配布まで',
         heading: '1つのフレームワークで制作プロセスを完結',
         subtitle: 'ソースはコンポーネント化し、配布はシンプルに。',
         steps: [
@@ -385,12 +515,77 @@ const en: MessageTree = {
         ],
         tags: ['Unified theme', 'TypeScript types', 'Extensible Vue Slots', 'Fixed-canvas support'],
       },
+      'developer-code': {
+        title: 'Code communication for developer training',
+        section: 'Developer components',
+        duration: 'Code and configuration',
+        notes: 'Demonstrate CodeBlock line numbers, highlighted lines, and error lines, together with CodeDiff, TerminalBlock, and ConfigBlock.',
+        eyebrow: '04 · Code and configuration',
+        subtitle: 'Source, diffs, command output, and configuration in a consistent format.',
+        footer: 'Code walkthrough components',
+        configCaption: 'Application environment',
+        configEntries: [
+          { key: 'APP_ENV', value: 'training', description: 'Identifies the current runtime environment.' },
+          { key: 'API_BASE_URL', value: 'http://localhost:8080', description: 'API address of the local development service.' },
+          { key: 'DB_PASSWORD', value: 'local-only-password', sensitive: true, description: 'Sensitive values are masked. Never include real secrets.' },
+        ],
+      },
+      'api-design': {
+        title: 'Explain requests and responses side by side',
+        section: 'Developer components',
+        duration: 'API design',
+        notes: 'Use the create-order API to demonstrate RequestResponse and explain request headers, payloads, status codes, and response bodies.',
+        eyebrow: '05 · API design',
+        subtitle: 'Compare HTTP methods, headers, status codes, and JSON payloads in one view.',
+        footer: 'POST /api/orders',
+        caption: 'Create an order: 201 Created',
+        requestDescription: 'Submit a customer ID and line items to create a pending order.',
+      },
+      'system-diagrams': {
+        title: 'Describe system structure with declarative data',
+        section: 'Developer components',
+        duration: 'Architecture and sequence',
+        notes: 'ArchitectureDiagram positions nodes in logical coordinates, while SequenceDiagram calculates its layout from participants and messages.',
+        eyebrow: '06 · Architecture and sequence',
+        subtitle: 'Use an architecture diagram for static dependencies and a sequence diagram for a dynamic call flow.',
+        footer: 'SVG · Offline rendering',
+        architecture: {
+          caption: 'Order service architecture',
+          nodes: [
+            { id: 'client', title: 'Web client', description: 'Vue application' },
+            { id: 'gateway', title: 'API gateway', description: 'Auth and routing' },
+            { id: 'orders', title: 'Order service', description: 'Business logic' },
+            { id: 'queue', title: 'Message queue', description: 'Order events' },
+            { id: 'database', title: 'Order database', description: 'Persistence' },
+          ],
+          edges: [
+            { from: 'client', to: 'gateway', label: 'HTTPS' },
+            { from: 'gateway', to: 'orders', label: 'REST' },
+            { from: 'orders', to: 'queue', label: 'Publish event', route: 'orthogonal' },
+            { from: 'orders', to: 'database', label: 'SQL', tone: 'success' },
+          ],
+        },
+        sequence: {
+          caption: 'Create-order call sequence',
+          participants: [
+            { id: 'client', title: 'Client', tone: 'default' },
+            { id: 'orders', title: 'Order service', subtitle: 'Order API', tone: 'accent' },
+            { id: 'database', title: 'Database', subtitle: 'PostgreSQL', tone: 'success' },
+          ],
+          messages: [
+            { from: 'client', to: 'orders', label: 'POST /orders', type: 'sync' },
+            { from: 'orders', to: 'database', label: 'INSERT order', type: 'sync' },
+            { from: 'database', to: 'orders', label: 'orderId', type: 'return' },
+            { from: 'orders', to: 'client', label: '201 Created', type: 'return' },
+          ],
+        },
+      },
       scaling: {
         title: 'Scale down, never up',
         section: 'Core design',
         duration: 'Scaling rules',
         notes: 'The outer container measures available space after toolbars, navigation, and padding. These regions are hidden in fullscreen, allowing a 1920 × 1080 display to show the canvas at 1:1.',
-        eyebrow: '04 · Scaling strategy',
+        eyebrow: '07 · Scaling strategy',
         subtitle: 'Fit smaller windows without enlarging images and text on larger displays.',
         footer: 'Maximum scale is 1',
         flow: [
@@ -407,7 +602,7 @@ const en: MessageTree = {
         section: 'Get started',
         duration: 'Build and deliver',
         notes: 'To create a new deck, copy decks/demo and edit its slides and registration. Run npm run build:offline to generate the shareable dist/index.html file.',
-        eyebrow: '05 · From source to delivery',
+        eyebrow: '08 · From source to delivery',
         heading: 'One framework for the entire authoring workflow',
         subtitle: 'Keep source code componentized and delivery simple.',
         steps: [

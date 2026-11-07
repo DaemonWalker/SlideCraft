@@ -3,6 +3,9 @@ import CoverSlide from './slides/CoverSlide.vue'
 import CanvasSlide from './slides/CanvasSlide.vue'
 import ComponentsSlide from './slides/ComponentsSlide.vue'
 import LibrarySlide from './slides/LibrarySlide.vue'
+import DeveloperCodeSlide from './slides/DeveloperCodeSlide.vue'
+import ApiDesignSlide from './slides/ApiDesignSlide.vue'
+import SystemDiagramsSlide from './slides/SystemDiagramsSlide.vue'
 import ScalingSlide from './slides/ScalingSlide.vue'
 import DeliverySlide from './slides/DeliverySlide.vue'
 
@@ -41,6 +44,30 @@ export const demoDeck: DeckDefinition = {
       duration: '组件目录',
       component: LibrarySlide,
       notes: '组件分为布局、文本、媒体、图形和信息几类。新增组件时应复用全局主题变量，不要在页面中重复定义颜色和字号体系。',
+    },
+    {
+      id: 'developer-code',
+      title: '面向开发培训的代码表达',
+      section: '开发培训组件',
+      duration: '代码与配置',
+      component: DeveloperCodeSlide,
+      notes: '展示 CodeBlock 的行号、指定行和错误行高亮，以及 CodeDiff、TerminalBlock 和 ConfigBlock 的组合方式。',
+    },
+    {
+      id: 'api-design',
+      title: '把请求与响应放在同一页讲解',
+      section: '开发培训组件',
+      duration: '接口设计',
+      component: ApiDesignSlide,
+      notes: '通过创建订单接口展示 RequestResponse，对照说明请求头、请求体、状态码和响应体。',
+    },
+    {
+      id: 'system-diagrams',
+      title: '用声明式数据描述系统结构',
+      section: '开发培训组件',
+      duration: '架构与时序',
+      component: SystemDiagramsSlide,
+      notes: 'ArchitectureDiagram 使用逻辑坐标放置节点，SequenceDiagram 根据参与者和消息自动计算布局。',
     },
     {
       id: 'scaling',
