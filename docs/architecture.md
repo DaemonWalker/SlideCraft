@@ -20,8 +20,9 @@ App.vue
 
 | 路径 | 职责 |
 | --- | --- |
-| `app/src/main.ts` | 创建 Vue 应用并加载全局样式 |
+| `app/src/main.ts` | 根据 Vite 模式选择课件或组件展示站，并加载全局样式 |
 | `app/src/App.vue` | 组合演示外壳、课件、导航、弹层和快捷键 |
+| `app/src/showcase/` | 组件目录、真实示例、搜索、API 与 Pages 展示界面 |
 | `app/src/core/types.ts` | 定义 `DeckDefinition` 与 `SlideDefinition` |
 | `app/src/core/useDeck.ts` | 当前页状态、边界约束、Hash 和文档标题 |
 | `app/src/core/SlideViewport.vue` | 1920 × 1080 画布测量、缩放与居中 |

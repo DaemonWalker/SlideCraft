@@ -12,9 +12,14 @@
 
 ## 字典结构
 
-每份字典分为两大命名空间：
+每份字典分为三大命名空间。课件和界面字典位于 `index.ts`，组件展示站字典独立维护在 `showcase.ts`，并合并到 `showcase` 命名空间：
 
 ```text
+showcase
+├─ 展示站界面、组件分类和用途说明
+├─ components.<组件 id>
+└─ examples（真实示例的文案与结构化数据）
+
 app
 ├─ 工具栏、导航和弹层
 ├─ 无障碍标签与提示
@@ -89,7 +94,7 @@ const steps = computed(() => tm<{ title: string; description: string }[]>(
 以新增 `ko` 为例：
 
 1. 在 `locales` 数组中加入 `'ko'`，`Locale` 类型会自动更新。
-2. 复制一份完整字典并翻译为韩文，例如 `const ko: MessageTree = { ... }`。
+2. 在 `index.ts` 中复制一份完整字典并翻译为韩文，例如 `const ko: MessageTree = { ... }`；同时在 `showcase.ts` 的 `showcaseMessages` 中补齐 `ko` 展示站字典并合并到 `showcase` 命名空间。
 3. 将 `ko` 加入 `messages`：`{ 'zh-CN': zhCN, ja, en, ko }`。
 4. 在 `app/src/components/LanguagePicker.vue` 的 `labels` 中加入 `ko: '한국어'`。
 5. 如有字体或标题排版差异，在 `app/src/styles/global.css` 中增加 `html[lang='ko']` 规则。

@@ -8,6 +8,8 @@ import { TwoColumn, Card, BulletList } from '../../../components'
 
 `Slide` 和 `SlideViewport` 属于核心模块，需从 `core/` 单独导入。
 
+[在线组件库](https://daemonwalker.github.io/SlideCraft/)提供全部布局与内容组件的真实预览和示例代码。新增或修改公共组件时，同步维护 `app/src/showcase/catalog.ts`、`ComponentExample.vue` 和三份 `app/src/i18n/showcase.ts` 字典。
+
 ## 核心页面组件
 
 ### Slide

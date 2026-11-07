@@ -7,10 +7,12 @@
 ```bash
 npm install
 npm run dev -- --port 7100
+npm run dev:showcase -- --port 7101
 npm run build
+npm run build:pages
 ```
 
-`npm run build` 会先运行 `vue-tsc --noEmit`，再执行 Vite 构建。项目当前没有自动化测试、ESLint 或格式化脚本，因此类型检查和人工演示检查都是必要步骤。
+`npm run build` 和 `npm run build:pages` 都会先运行 `vue-tsc --noEmit`，再分别执行课件与组件展示站的 Vite 构建。项目当前没有自动化测试、ESLint 或格式化脚本，因此类型检查和人工演示检查都是必要步骤。修改公共组件时，还需在展示站检查对应示例及三语言排版。
 
 ## 代码风格
 

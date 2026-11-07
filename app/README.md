@@ -10,7 +10,8 @@
 - 按钮、键盘、触屏翻页和 Hash 页码定位。
 - 幻灯片总览、讲师备注、快捷键帮助和全屏演示。
 - 全屏时隐藏工具栏、底部导航和进度条。
-- 19 个布局与内容组件，以及 9 页示例课件。
+- 23 个布局与内容组件，以及 9 页示例课件。
+- GitHub Pages 组件展示站，提供搜索、真实预览、API、示例代码和三语言切换。
 - 中文、日文、英文切换，覆盖工具栏、课件正文、总览、讲师备注和浏览器标题。
 - 自动保存语言选择，下次打开时恢复。
 - CSS、JavaScript 和 SVG 图片全部内嵌的单文件构建。
@@ -41,6 +42,15 @@ dist/index.html
 ```
 
 该文件不需要服务器。接收方可以使用现代 Chrome 或 Edge 直接打开，也可以在断网后切换语言。
+
+组件展示站：
+
+```bash
+npm run dev:showcase -- --port 7101
+npm run build:pages
+```
+
+Pages 构建同样输出 `dist/index.html`，但根组件切换为 `src/showcase/ShowcaseApp.vue`。自动部署配置见根目录 `.github/workflows/pages.yml`。
 
 ## 项目结构
 

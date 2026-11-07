@@ -39,6 +39,29 @@ npm run preview -- --port 7100
 
 `preview` 用于检查构建结果，但最终离线验收仍应直接双击 `dist/index.html`，以 `file://` 方式打开。
 
+## GitHub Pages 组件库
+
+在线地址：[https://daemonwalker.github.io/SlideCraft/](https://daemonwalker.github.io/SlideCraft/)。
+
+展示站源码位于 `app/src/showcase/`，组件说明和示例文案位于 `app/src/i18n/showcase.ts`。本地运行与构建：
+
+```bash
+npm run dev:showcase -- --port 7100
+npm run build:pages
+npm run preview -- --port 7100
+```
+
+`build:pages` 使用 Vite 的 `showcase` 模式，将 `app/src/showcase/ShowcaseApp.vue` 作为根组件，产物仍为 `app/dist/index.html`。普通 `build` 和 `build:offline` 继续使用课件根组件，不受展示站影响。
+
+自动部署工作流位于 `.github/workflows/pages.yml`，在推送到 `main` 或手动触发时执行 `npm ci`、`npm run build:pages` 并发布 `app/dist/`。首次配置：
+
+1. 将工作流和源码推送至 GitHub 仓库的 `main` 分支。
+2. 打开仓库 **Settings → Pages**，在 **Build and deployment** 下将 **Source** 设为 **GitHub Actions**。
+3. 在 **Actions** 中运行 **Deploy component library to GitHub Pages**，等待 `build` 和 `deploy` 成功。
+4. 打开 Pages 地址，检查组件导航、Hash 深链接、语言切换和图片预览。
+
+展示站使用 `#/components/<组件 id>` 定位组件，不依赖服务端路由回退。部署到仓库子路径时，现有 `base: './'` 和资源内嵌配置无需修改。
+
 ## 分发方式
 
 将 `dist/index.html` 重命名为易于识别的课件名称后单独分发即可。接收方无需安装 Node.js、npm 或启动本地服务器，推荐使用现代 Chrome 或 Edge。

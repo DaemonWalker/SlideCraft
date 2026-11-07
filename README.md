@@ -33,6 +33,20 @@ npm run build:offline
 
 交付文件位于 `app/dist/index.html`，可用现代 Chrome 或 Edge 直接打开，无需启动服务。
 
+## 在线组件库
+
+GitHub Pages 展示站：[https://daemonwalker.github.io/SlideCraft/](https://daemonwalker.github.io/SlideCraft/)。可浏览全部 23 个布局与内容组件，查看真实画布预览、Props、Slots 和示例代码，并切换中文、日文和英文。
+
+本地启动展示站或生成 Pages 构建：
+
+```bash
+cd app
+npm run dev:showcase -- --port 7100
+npm run build:pages
+```
+
+推送到 `main` 后，`.github/workflows/pages.yml` 会自动构建并部署。首次使用前需在仓库 **Settings → Pages** 中将 **Source** 设为 **GitHub Actions**，详见[构建与交付](docs/deployment.md)。
+
 ## 演示操作
 
 | 操作 | 方式 |
@@ -58,6 +72,7 @@ npm run build:offline
 │  │  ├─ core/                       # 页面容器、缩放、翻页与类型
 │  │  ├─ components/                 # 布局、内容和语言选择组件
 │  │  ├─ decks/demo/                 # 示例课件
+│  │  ├─ showcase/                   # GitHub Pages 组件展示站
 │  │  ├─ i18n/                       # 中日英字典与语言状态
 │  │  ├─ styles/                     # 全局样式和主题变量
 │  │  ├─ App.vue                     # 演示工具栏、导航与弹层

@@ -1,12 +1,14 @@
 import { ref, watch } from 'vue'
+import { showcaseMessages } from './showcase'
 
 export const locales = ['zh-CN', 'ja', 'en'] as const
 export type Locale = typeof locales[number]
 
-type MessageValue = string | boolean | MessageValue[] | { [key: string]: MessageValue }
+type MessageValue = string | number | boolean | MessageValue[] | { [key: string]: MessageValue }
 type MessageTree = { [key: string]: MessageValue }
 
 const zhCN: MessageTree = {
+  showcase: showcaseMessages['zh-CN'],
   app: {
     subtitle: '组件化 HTML 幻灯片框架',
     overview: '总览',
@@ -211,6 +213,7 @@ const zhCN: MessageTree = {
 }
 
 const ja: MessageTree = {
+  showcase: showcaseMessages.ja,
   app: {
     subtitle: 'コンポーネント型 HTML プレゼンフレームワーク',
     overview: '一覧',
@@ -415,6 +418,7 @@ const ja: MessageTree = {
 }
 
 const en: MessageTree = {
+  showcase: showcaseMessages.en,
   app: {
     subtitle: 'Component-driven HTML presentation framework',
     overview: 'Overview',
