@@ -110,6 +110,25 @@ export const componentCatalog: ComponentCatalogItem[] = [
 </ProcessLayout>`,
   },
   {
+    id: 'tab-panel',
+    name: 'TabPanel',
+    category: 'layout',
+    source: 'layout/TabPanel.vue',
+    props: ['items: TabPanelItem[]', "defaultActive?: string = ''", "ariaLabel?: string = ''"],
+    slots: ['<item.id>'],
+    code: `<TabPanel
+  :items="[
+    { id: 'javascript', label: 'JavaScript' },
+    { id: 'typescript', label: 'TypeScript' },
+  ]"
+  default-active="javascript"
+  aria-label="Code language"
+>
+  <template #javascript><CodeBlock :code="javascriptCode" language="js" /></template>
+  <template #typescript><CodeBlock :code="typescriptCode" language="ts" /></template>
+</TabPanel>`,
+  },
+  {
     id: 'bullet-list',
     name: 'BulletList',
     category: 'text',

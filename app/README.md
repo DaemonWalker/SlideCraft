@@ -10,7 +10,7 @@
 - 按钮、键盘、触屏翻页和 Hash 页码定位。
 - 幻灯片总览、讲师备注、快捷键帮助和全屏演示。
 - 全屏时隐藏工具栏、底部导航和进度条。
-- 23 个布局与内容组件，以及 9 页示例课件。
+- 24 个布局与内容组件，以及 9 页示例课件。
 - GitHub Pages 组件展示站，提供搜索、真实预览、API、示例代码和三语言切换。
 - 中文、日文、英文切换，覆盖工具栏、课件正文、总览、讲师备注和浏览器标题。
 - 自动保存语言选择，下次打开时恢复。
@@ -172,7 +172,7 @@ export const myCourse: DeckDefinition = {
 | 类型 | 组件 |
 | --- | --- |
 | 页面 | `Slide`、`SlideViewport` |
-| 布局 | `TwoColumn`、`Grid`、`Stack` |
+| 布局 | `TwoColumn`、`Grid`、`Stack`、`TabPanel` |
 | 文本 | `BulletList`、`TagList`、`Metric` |
 | 容器 | `Card`、`Callout` |
 | 媒体 | `CodeBlock`、`CodeDiff`、`TerminalBlock`、`ImageFigure` |

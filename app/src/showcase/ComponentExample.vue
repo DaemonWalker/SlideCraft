@@ -20,6 +20,7 @@ import {
   SectionLayout,
   SequenceDiagram,
   Stack,
+  TabPanel,
   TagList,
   TerminalBlock,
   Timeline,
@@ -87,6 +88,21 @@ import './styles/global.css'
 
 const app = createApp(App)
 app.mount('#app')`
+
+const javascriptCode = `export async function createOrder(request) {
+  const response = await api.post('/orders', request)
+  return response.data
+}`
+
+const typescriptCode = `interface OrderRequest {
+  customerId: string
+  items: Array<{ sku: string; quantity: number }>
+}
+
+export async function createOrder(request: OrderRequest) {
+  const response = await api.post<Order>('/orders', request)
+  return response.data
+}`
 
 const diffLines: DiffLine[] = [
   { content: 'export const renderSlide = (slide) => {' },
@@ -172,6 +188,23 @@ const diffLines: DiffLine[] = [
     <ProcessLayout v-else-if="componentId === 'process-layout'" :items="processSteps" :active-step="2">
       {{ t('showcase.examples.processConclusion') }}
     </ProcessLayout>
+
+    <TabPanel
+      v-else-if="componentId === 'tab-panel'"
+      :items="[
+        { id: 'javascript', label: 'JavaScript' },
+        { id: 'typescript', label: 'TypeScript' },
+      ]"
+      default-active="typescript"
+      :aria-label="t('showcase.examples.tabAriaLabel')"
+    >
+      <template #javascript>
+        <CodeBlock :code="javascriptCode" language="js" caption="src/order.js" show-line-numbers />
+      </template>
+      <template #typescript>
+        <CodeBlock :code="typescriptCode" language="ts" caption="src/order.ts" show-line-numbers />
+      </template>
+    </TabPanel>
 
     <TwoColumn v-else-if="componentId === 'bullet-list'" :gap="36" align="start">
       <template #left><Card title="Unordered"><BulletList :items="bullets" /></Card></template>

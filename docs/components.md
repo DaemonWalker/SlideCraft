@@ -176,6 +176,34 @@ interface ProcessStep {
 </ProcessLayout>
 ```
 
+### TabPanel
+
+在同一区域切换不同工具、语言或版本的内容。标签通过 `items` 配置，每个面板使用与 `id` 同名的动态插槽，可放入代码、图片或其他组件。
+
+| Prop | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `items` | `TabPanelItem[]` | 必填 | 标签列表，`id` 必须唯一且与插槽名一致 |
+| `defaultActive` | `string` | `''` | 默认激活的标签 `id`；为空或无效时使用第一项 |
+| `ariaLabel` | `string` | `''` | 标签组的无障碍名称 |
+
+```ts
+interface TabPanelItem {
+  id: string
+  label: string
+}
+```
+
+Slots：由 `items` 动态决定，例如 `javascript`、`typescript`。
+
+```vue
+<TabPanel :items="codeTabs" default-active="typescript" aria-label="代码语言">
+  <template #javascript><CodeBlock :code="javascriptCode" language="js" /></template>
+  <template #typescript><CodeBlock :code="typescriptCode" language="ts" /></template>
+</TabPanel>
+```
+
+标签使用原生按钮，支持 Tab 键聚焦以及 Enter、Space 激活，不占用幻灯片的方向键和 Home/End 翻页操作。非激活面板仅隐藏而不销毁，切换后保留内部状态。建议使用 2～4 个短标签，并分别检查每种面板内容的溢出情况。
+
 ## 文本与信息组件
 
 ### BulletList

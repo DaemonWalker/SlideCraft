@@ -5,6 +5,7 @@ export { default as TitleLayout } from './layout/TitleLayout.vue'
 export { default as SectionLayout } from './layout/SectionLayout.vue'
 export { default as ComparisonLayout } from './layout/ComparisonLayout.vue'
 export { default as ProcessLayout } from './layout/ProcessLayout.vue'
+export { default as TabPanel } from './layout/TabPanel.vue'
 
 export { default as BulletList } from './content/BulletList.vue'
 export { default as Callout } from './content/Callout.vue'

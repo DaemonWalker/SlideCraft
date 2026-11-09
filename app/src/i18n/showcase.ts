@@ -42,6 +42,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       'section-layout': '用大型章节编号和标题创建深色过渡页。',
       'comparison-layout': '结合关键指标与左右插槽展示前后或优劣对照。',
       'process-layout': '用带编号的横向步骤表达流程，并突出当前步骤。',
+      'tab-panel': '在同一区域切换不同工具、语言或版本的代码、图片和其他内容。',
       'bullet-list': '展示无序或有序要点，也可通过插槽追加列表项。',
       'tag-list': '以可换行的胶囊标签展示技术、特性或分类。',
       metric: '突出数值、指标名称和简短说明。',
@@ -67,7 +68,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       tags: ['Vue 3', 'TypeScript', 'Vite', '离线 HTML'],
       metrics: [
         { value: '1920 × 1080', label: '设计画布', description: '所有页面共享同一坐标系。' },
-        { value: '23', label: '可复用组件', description: '覆盖布局、内容与图形。' },
+        { value: '24', label: '可复用组件', description: '覆盖布局、内容与图形。' },
         { value: '1', label: '交付文件', description: '资源全部内嵌，可离线打开。' },
       ],
       cardTitle: '组件化页面',
@@ -98,6 +99,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
         { title: '构建交付', description: '生成单文件 HTML。' },
       ],
       processConclusion: '一条命令完成类型检查与离线构建。',
+      tabAriaLabel: '代码语言',
       terminalEntries: [
         { command: 'npm run build:offline', cwd: 'app', output: '✓ 类型检查通过\n✓ 单文件构建完成', status: 'success', exitCode: 0 },
         { command: 'npm run preview', cwd: 'app', output: '本地预览服务已启动', status: 'success', exitCode: 0 },
@@ -199,6 +201,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       'section-layout': '大きな章番号とタイトルでダークなセクション画面を作ります。',
       'comparison-layout': '主要指標と左右の Slots で Before/After などを比較します。',
       'process-layout': '番号付きの横方向ステップで流程を示し、現在のステップを強調します。',
+      'tab-panel': 'ツール、言語、バージョンごとのコード、画像、その他の内容を同じ領域で切り替えます。',
       'bullet-list': '箇条書きや番号付きリストを表示し、Slots 項目も追加できます。',
       'tag-list': '折り返し可能な pill 型タグで技術や特徴を示します。',
       metric: '数値、指標名、短い説明を強調します。',
@@ -224,7 +227,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       tags: ['Vue 3', 'TypeScript', 'Vite', 'オフライン HTML'],
       metrics: [
         { value: '1920 × 1080', label: '設計キャンバス', description: '全画面で同じ座標系を使用。' },
-        { value: '23', label: '再利用可能な部品', description: 'レイアウト、内容、図を網羅。' },
+        { value: '24', label: '再利用可能な部品', description: 'レイアウト、内容、図を網羅。' },
         { value: '1', label: '配布ファイル', description: '全リソースを埋め込み。' },
       ],
       cardTitle: 'コンポーネント型ページ',
@@ -255,6 +258,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
         { title: 'ビルド配布', description: '単一 HTML を生成する。' },
       ],
       processConclusion: '1 つのコマンドで型検査とオフラインビルドを実行します。',
+      tabAriaLabel: 'コード言語',
       terminalEntries: [
         { command: 'npm run build:offline', cwd: 'app', output: '✓ 型検査成功\n✓ 単一ファイルのビルド完了', status: 'success', exitCode: 0 },
         { command: 'npm run preview', cwd: 'app', output: 'ローカルプレビューを起動しました', status: 'success', exitCode: 0 },
@@ -356,6 +360,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       'section-layout': 'Create dark section transitions with a large number and title.',
       'comparison-layout': 'Combine key metrics with left and right slots for before/after comparisons.',
       'process-layout': 'Express a process with numbered horizontal steps and highlight the active step.',
+      'tab-panel': 'Switch between tool, language, or version variants of code, images, and other content in one area.',
       'bullet-list': 'Display unordered or ordered points, with slot support for additional items.',
       'tag-list': 'Show technologies, features, or categories as wrapping pill tags.',
       metric: 'Highlight a value, metric label, and concise description.',
@@ -381,7 +386,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       tags: ['Vue 3', 'TypeScript', 'Vite', 'Offline HTML'],
       metrics: [
         { value: '1920 × 1080', label: 'Design canvas', description: 'One coordinate system for every slide.' },
-        { value: '23', label: 'Reusable components', description: 'Layout, content, and diagrams.' },
+        { value: '24', label: 'Reusable components', description: 'Layout, content, and diagrams.' },
         { value: '1', label: 'Delivery file', description: 'All resources embedded for offline use.' },
       ],
       cardTitle: 'Component-based slides',
@@ -412,6 +417,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
         { title: 'Deliver', description: 'Generate one HTML file.' },
       ],
       processConclusion: 'One command runs type checking and creates the offline build.',
+      tabAriaLabel: 'Code language',
       terminalEntries: [
         { command: 'npm run build:offline', cwd: 'app', output: '✓ Type check passed\n✓ Single-file build completed', status: 'success', exitCode: 0 },
         { command: 'npm run preview', cwd: 'app', output: 'Local preview server started', status: 'success', exitCode: 0 },
