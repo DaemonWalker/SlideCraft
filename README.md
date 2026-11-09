@@ -19,10 +19,10 @@
 ```bash
 cd app
 npm install
-npm run dev -- --port 7100
+npm run dev
 ```
 
-打开终端输出的本地地址即可预览。Vite 参数可以继续追加在 `npm run dev --` 之后。
+开发服务器默认使用 7100 端口；如果已被占用，会自动尝试下一个可用端口。打开终端输出的本地地址即可预览，Vite 参数可以继续追加在 `npm run dev --` 之后。
 
 生成离线版本：
 

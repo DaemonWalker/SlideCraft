@@ -7,6 +7,8 @@ export default defineConfig({
   plugins: [vue(), viteSingleFile()],
   server: {
     host: '0.0.0.0',
+    port: 7100,
+    strictPort: false,
   },
   build: {
     assetsInlineLimit: 100_000_000,

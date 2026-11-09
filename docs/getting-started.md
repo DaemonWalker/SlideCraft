@@ -11,10 +11,10 @@
 ```bash
 cd app
 npm install
-npm run dev -- --port 7100
+npm run dev
 ```
 
-也可以直接运行 `npm run dev`，由 Vite 选择默认端口。启动后打开终端输出的本地地址。
+开发服务器默认使用 7100 端口；如果已被占用，会自动尝试下一个可用端口。启动后打开终端输出的本地地址。
 
 可用脚本：
 

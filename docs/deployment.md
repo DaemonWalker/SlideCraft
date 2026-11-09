@@ -28,8 +28,10 @@ app/dist/index.html
 开发预览：
 
 ```bash
-npm run dev -- --port 7100
+npm run dev
 ```
+
+开发服务器默认使用 7100 端口，占用时自动尝试下一个可用端口；应打开终端实际输出的地址。
 
 构建目录预览：
 

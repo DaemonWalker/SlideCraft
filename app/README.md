@@ -23,10 +23,10 @@ npm install
 npm run dev
 ```
 
-开发服务器支持 Vite 参数，例如：
+开发服务器默认使用 7100 端口；如果已被占用，会自动尝试下一个可用端口。也支持通过 Vite 参数覆盖，例如：
 
 ```bash
-npm run dev -- --port 7100
+npm run dev -- --port 7200
 ```
 
 生成单文件离线版：
