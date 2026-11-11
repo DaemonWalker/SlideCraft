@@ -66,8 +66,8 @@ const formattedNumber = computed(() => typeof props.number === 'number'
   line-height: 1.6;
 }
 
-:global(html[lang='ja']) .section-layout h1,
-:global(html[lang='en']) .section-layout h1 {
+:global(html[lang='ja'] .section-layout h1),
+:global(html[lang='en'] .section-layout h1) {
   font-size: 58px;
 }
 </style>

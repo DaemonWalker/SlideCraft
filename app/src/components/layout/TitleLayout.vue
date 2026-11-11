@@ -99,13 +99,13 @@ withDefaults(defineProps<{
   min-width: 0;
 }
 
-:global(html[lang='ja']) .title-layout__title,
-:global(html[lang='en']) .title-layout__title {
+:global(html[lang='ja'] .title-layout__title),
+:global(html[lang='en'] .title-layout__title) {
   font-size: 68px;
   line-height: 1.12;
 }
 
-:global(html[lang='en']) .title-layout__eyebrow {
+:global(html[lang='en'] .title-layout__eyebrow) {
   letter-spacing: 0.08em;
 }
 </style>

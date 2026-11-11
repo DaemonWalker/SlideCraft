@@ -75,7 +75,7 @@ export const myCourse: DeckDefinition = {
       section: '核心流程',
       duration: '5 分钟',
       component: OrderApiSlide,
-      notes: '这里填写当前页的讲师备注。',
+      notes: '这里填写当前页的备注，内容可按需自由填写。',
     },
   ],
 }
