@@ -138,6 +138,27 @@ import architectureImage from '../../../assets/architecture.svg'
 
 `ImageFigure` 默认支持点击放大，装饰性或不需要放大的图片可设置 `:zoomable="false"`。
 
+### 添加可下载附件
+
+将附件放入 `app/src/assets/attachments/`，使用 `?attachment` 导入并传给 `AttachmentDownload`：
+
+```vue
+<script setup lang="ts">
+import { AttachmentDownload } from '../../../components'
+import practiceFile from '../../../assets/attachments/practice.zip?attachment'
+</script>
+
+<template>
+  <AttachmentDownload
+    :src="practiceFile"
+    file-name="practice.zip"
+    description="本节课的源码与练习。"
+  />
+</template>
+```
+
+`?attachment` 会在构建时校验原始文件大小并生成 Base64 Data URL。附件仍内嵌于最终 HTML，不会产生 `attachments` 交付目录；只有用户点击下载时才解码并创建 Blob。默认单个附件不超过 10MiB，全部附件总计不超过 30MiB，重复导入同一文件只计算一次。超限时构建失败，开发预览也会显示错误。限制配置见[构建与离线交付](deployment.md)。
+
 ## 7. 检查页面
 
 开发环境中重点检查：

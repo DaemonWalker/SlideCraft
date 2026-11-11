@@ -183,6 +183,19 @@ export const componentCatalog: ComponentCatalogItem[] = [
 </Callout>`,
   },
   {
+    id: 'attachment-download',
+    name: 'AttachmentDownload',
+    category: 'media',
+    source: 'content/AttachmentDownload.vue',
+    props: ['src: string', 'fileName: string', "description?: string = ''"],
+    slots: [],
+    code: `<AttachmentDownload
+  :src="practiceFile"
+  file-name="practice.zip"
+  description="Source code and exercises for this lesson."
+/>`,
+  },
+  {
     id: 'code-block',
     name: 'CodeBlock',
     category: 'media',

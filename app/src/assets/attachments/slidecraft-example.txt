@@ -1,0 +1,4 @@
+SlideCraft attachment example
+
+This text file is embedded in the single-file HTML build.
+Click the download action to save a copy without a server or network request.

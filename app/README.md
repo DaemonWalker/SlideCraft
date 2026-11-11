@@ -10,11 +10,11 @@
 - 按钮、键盘、触屏翻页和 Hash 页码定位。
 - 幻灯片总览、讲师备注、快捷键帮助和全屏演示。
 - 全屏时隐藏工具栏、底部导航和进度条。
-- 24 个布局与内容组件，以及 9 页示例课件。
+- 25 个布局与内容组件，以及 9 页示例课件。
 - GitHub Pages 组件展示站，提供搜索、真实预览、API、示例代码和三语言切换。
 - 中文、日文、英文切换，覆盖工具栏、课件正文、总览、讲师备注和浏览器标题。
 - 自动保存语言选择，下次打开时恢复。
-- CSS、JavaScript 和 SVG 图片全部内嵌的单文件构建。
+- CSS、JavaScript、本地图片和下载附件全部内嵌的单文件构建。
 
 ## 启动与构建
 
@@ -175,7 +175,7 @@ export const myCourse: DeckDefinition = {
 | 布局 | `TwoColumn`、`Grid`、`Stack`、`TabPanel` |
 | 文本 | `BulletList`、`TagList`、`Metric` |
 | 容器 | `Card`、`Callout` |
-| 媒体 | `CodeBlock`、`CodeDiff`、`TerminalBlock`、`ImageFigure` |
+| 媒体 | `AttachmentDownload`、`CodeBlock`、`CodeDiff`、`TerminalBlock`、`ImageFigure` |
 | 开发配置 | `ConfigBlock`、`RequestResponse` |
 | 数据 | `DataTable` |
 | 图形 | `FlowDiagram`、`Timeline`、`ArchitectureDiagram`、`SequenceDiagram` |

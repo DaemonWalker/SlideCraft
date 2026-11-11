@@ -7,7 +7,7 @@
 - 固定 1920 × 1080 设计画布，小窗口等比缩小，大窗口保持原始尺寸并居中。
 - 按钮、键盘、触屏翻页，以及 `#/页码` 定位。
 - 幻灯片总览、讲师备注、快捷键帮助和全屏演示。
-- 8 个布局组件、16 个内容组件和 9 页示例课件。
+- 8 个布局组件、17 个内容组件和 9 页示例课件。
 - 中文、日文、英文界面与课件内容切换，自动保存语言选择。
 - 图片点击放大、开发环境内容溢出警告。
 - CSS、JavaScript 和本地图片内嵌的单文件离线构建。
@@ -35,7 +35,7 @@ npm run build:offline
 
 ## 在线组件库
 
-GitHub Pages 展示站：[https://daemonwalker.github.io/SlideCraft/](https://daemonwalker.github.io/SlideCraft/)。可浏览全部 24 个布局与内容组件，查看真实画布预览、Props、Slots 和示例代码，并切换中文、日文和英文。
+GitHub Pages 展示站：[https://daemonwalker.github.io/SlideCraft/](https://daemonwalker.github.io/SlideCraft/)。可浏览全部 25 个布局与内容组件，查看真实画布预览、Props、Slots 和示例代码，并切换中文、日文和英文。
 
 本地启动展示站或生成 Pages 构建：
 

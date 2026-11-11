@@ -251,6 +251,33 @@ Slots：由 `items` 动态决定，例如 `javascript`、`typescript`。
 
 ## 媒体与数据组件
 
+### AttachmentDownload
+
+展示并下载构建时内嵌的本地附件。文件格式和原始大小根据附件自动显示；点击下载时才将 Base64 解码为 Blob，不需要服务器或运行时文件请求。
+
+| Prop | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `src` | `string` | 必填 | 使用 `?attachment` 导入的附件数据 |
+| `fileName` | `string` | 必填 | 显示名称及下载后的文件名，应包含扩展名 |
+| `description` | `string` | `''` | 附件内容或用途说明 |
+
+```vue
+<script setup lang="ts">
+import { AttachmentDownload } from '../../../components'
+import practiceFile from '../../../assets/attachments/practice.zip?attachment'
+</script>
+
+<template>
+  <AttachmentDownload
+    :src="practiceFile"
+    file-name="practice.zip"
+    description="本节课的源码与练习。"
+  />
+</template>
+```
+
+附件必须是本地文件并通过 `?attachment` 导入。默认单个附件上限为 10MiB，同一课件的附件总量上限为 30MiB；超限时开发预览和构建会报错。配置方式见[构建与离线交付](deployment.md)。
+
 ### CodeBlock
 
 | Prop | 类型 | 默认值 | 说明 |

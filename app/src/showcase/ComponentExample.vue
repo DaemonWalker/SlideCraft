@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import Slide from '../core/Slide.vue'
 import {
   ArchitectureDiagram,
+  AttachmentDownload,
   BulletList,
   Callout,
   Card,
@@ -38,6 +39,7 @@ import type { SequenceMessage, SequenceParticipant } from '../components/content
 import type { TerminalEntry } from '../components/content/TerminalBlock.vue'
 import type { TimelineItem } from '../components/content/Timeline.vue'
 import viewportDiagram from '../assets/viewport-diagram.svg'
+import attachmentExample from '../assets/attachments/slidecraft-example.txt?attachment'
 import { useI18n } from '../i18n'
 
 const props = defineProps<{
@@ -233,6 +235,13 @@ const diffLines: DiffLine[] = [
       <Callout :title="callouts[1].title" tone="warning">{{ callouts[1].body }}</Callout>
       <Callout :title="callouts[2].title" tone="success">{{ callouts[2].body }}</Callout>
     </Stack>
+
+    <AttachmentDownload
+      v-else-if="componentId === 'attachment-download'"
+      :src="attachmentExample"
+      :file-name="t('showcase.examples.attachmentFileName')"
+      :description="t('showcase.examples.attachmentDescription')"
+    />
 
     <CodeBlock
       v-else-if="componentId === 'code-block'"

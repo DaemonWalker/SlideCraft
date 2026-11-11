@@ -32,6 +32,7 @@ App.vue
 | `app/src/i18n/index.ts` | 语言字典、共享语言状态、翻译与持久化 |
 | `app/src/styles/global.css` | 主题变量、基础样式和语言排版差异 |
 | `app/vite.config.ts` | 相对路径和资源内嵌的单文件构建 |
+| `app/attachment-limits.ts` | 将 `?attachment` 文件转换为 Data URL，并校验单文件与总体积 |
 
 ## 课件数据与渲染
 

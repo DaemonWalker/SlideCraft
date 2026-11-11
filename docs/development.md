@@ -46,6 +46,7 @@ npm run build:pages
 ## 资源与离线约束
 
 - 图片放入 `src/assets/` 并通过 ES Module 导入。
+- 可下载附件放入 `src/assets/attachments/`，使用 `?attachment` 导入；不要绕过构建校验手工拼接附件 Data URL。
 - 不使用 CDN、远程脚本、远程字体或运行时 `fetch()` 本地文件。
 - 优先使用 SVG、WebP 或压缩后的 PNG，避免无必要地增大单文件 HTML。
 - 不直接手工编辑 `dist/index.html`；交付文件必须由源码重新构建。

@@ -95,6 +95,33 @@ npm run preview -- --port 7100
 - 新增大型图片前先压缩，因为资源会内嵌并增大 HTML 文件。
 - 页码继续使用 `#/1` 形式，不依赖服务端路由回退。
 
+## 附件体积限制
+
+`AttachmentDownload` 的本地附件必须使用 `?attachment` 导入。`app/attachment-limits.ts` 在加载模块时读取原始文件，生成 Data URL 并校验大小，不依赖额外的交付目录。
+
+默认预算：
+
+- 单个附件最大 10MiB（10 × 1024 × 1024 字节）。
+- 同一构建中的附件总量最大 30MiB，重复导入只计算一次。
+- 达到单文件或总量上限的 80% 时输出警告，超过上限时报错并终止构建。
+- 开发预览中，超限错误同时显示在终端和 Vite 错误浮层。
+
+可在 `app/vite.config.ts` 中按原始字节数显式调整：
+
+```ts
+plugins: [
+  attachmentLimits({
+    maxFileSize: 10 * 1024 * 1024,
+    maxTotalSize: 30 * 1024 * 1024,
+    warningThreshold: 0.8,
+  }),
+  vue(),
+  viteSingleFile(),
+],
+```
+
+Base64 编码会使附件在 HTML 中增大约三分之一。即使使用点击时解码，浏览器打开课件时仍需读取全部内嵌数据，因此调整预算后必须重新检查 HTML 打开速度、内存和离线下载。
+
 ## 当前限制
 
 - 构建目标是单文件 HTML，不是 PDF 或 PPTX。
