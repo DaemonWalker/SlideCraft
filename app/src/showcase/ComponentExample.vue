@@ -11,6 +11,7 @@ import {
   CodeDiff,
   ComparisonLayout,
   ConfigBlock,
+  CycleDiagram,
   DataTable,
   FlowDiagram,
   Grid,
@@ -32,6 +33,7 @@ import type { ArchitectureEdge, ArchitectureNode } from '../components/content/A
 import type { DiffLine } from '../components/content/CodeDiff.vue'
 import type { ComparisonMetric } from '../components/layout/ComparisonLayout.vue'
 import type { ConfigEntry } from '../components/content/ConfigBlock.vue'
+import type { CycleStep } from '../components/content/CycleDiagram.vue'
 import type { FlowItem } from '../components/content/FlowDiagram.vue'
 import type { ProcessStep } from '../components/layout/ProcessLayout.vue'
 import type { HttpRequest, HttpResponse } from '../components/content/RequestResponse.vue'
@@ -67,6 +69,7 @@ const architectureNodes = computed(() => tm<ArchitectureNode[]>('showcase.exampl
 const architectureEdges = computed(() => tm<ArchitectureEdge[]>('showcase.examples.architectureEdges'))
 const sequenceParticipants = computed(() => tm<SequenceParticipant[]>('showcase.examples.sequenceParticipants'))
 const sequenceMessages = computed(() => tm<SequenceMessage[]>('showcase.examples.sequenceMessages'))
+const cycleSteps = computed(() => tm<CycleStep[]>('showcase.examples.cycleSteps'))
 const flowItems = computed(() => tm<FlowItem[]>('showcase.examples.flowItems'))
 const timelineItems = computed(() => tm<TimelineItem[]>('showcase.examples.timelineItems'))
 const request = computed<HttpRequest>(() => ({
@@ -307,6 +310,16 @@ const diffLines: DiffLine[] = [
       :messages="sequenceMessages"
       :caption="t('showcase.examples.sequenceCaption')"
     />
+
+    <CycleDiagram
+      v-else-if="componentId === 'cycle-diagram'"
+      :items="cycleSteps"
+      :active-step="2"
+      :center-label="t('showcase.examples.cycleCenter')"
+      :caption="t('showcase.examples.cycleCaption')"
+    >
+      {{ t('showcase.examples.cycleConclusion') }}
+    </CycleDiagram>
 
     <FlowDiagram v-else-if="componentId === 'flow-diagram'" :items="flowItems" />
 

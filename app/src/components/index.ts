@@ -15,6 +15,7 @@ export { default as ArchitectureDiagram } from './content/ArchitectureDiagram.vu
 export { default as CodeBlock } from './content/CodeBlock.vue'
 export { default as CodeDiff } from './content/CodeDiff.vue'
 export { default as ConfigBlock } from './content/ConfigBlock.vue'
+export { default as CycleDiagram } from './content/CycleDiagram.vue'
 export { default as DataTable } from './content/DataTable.vue'
 export { default as FlowDiagram } from './content/FlowDiagram.vue'
 export { default as ImageFigure } from './content/ImageFigure.vue'

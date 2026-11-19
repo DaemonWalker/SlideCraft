@@ -480,6 +480,38 @@ interface SequenceMessage {
 
 支持同步、异步、返回和自身调用。引用不存在的参与者时忽略该消息；建议每页控制在 2～6 个参与者和少量关键消息，长文本应拆页。
 
+### CycleDiagram
+
+自动排列 3～5 个步骤，并用顺时针有向连线表达循环。末步会连接首步，可突出当前步骤，并在下方追加结论或提示。
+
+| Prop | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `items` | `CycleStep[]` | 必填 | 按顺时针顺序排列的步骤 |
+| `activeStep` | `number` | `0` | 需要强调的步骤序号，从 1 开始；`0` 表示不强调 |
+| `centerLabel` | `string` | `''` | 环形中心文字 |
+| `caption` | `string` | `''` | 图形标题和无障碍名称 |
+| `width` | `number` | `1400` | SVG 逻辑宽度 |
+
+```ts
+interface CycleStep {
+  title: string
+  description?: string
+}
+```
+
+Slots：
+
+- 默认插槽：环形图下方的结论、提示或命令。
+- `center`：自定义中心 HTML 内容；提供后覆盖 `centerLabel`。
+
+3、4、5 个步骤分别使用三角、矩形和五边形布局。少于 3 步时开发环境输出警告并降级为横向布局，多于 5 步时警告并只显示前 5 步。文案不会自动截断，应避免节点标题和说明过长，并检查 SVG 内部是否出现重叠或裁切。支持 `<Slide dark>`。
+
+```vue
+<CycleDiagram :items="steps" :active-step="1" center-label="循环" caption="Agent 工作循环">
+  <p>每轮结果都会成为下一轮决策的依据。</p>
+</CycleDiagram>
+```
+
 ### FlowDiagram
 
 | Prop | 类型 | 默认值 |

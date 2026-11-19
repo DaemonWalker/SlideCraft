@@ -321,6 +321,22 @@ export const componentCatalog: ComponentCatalogItem[] = [
 />`,
   },
   {
+    id: 'cycle-diagram',
+    name: 'CycleDiagram',
+    category: 'diagram',
+    source: 'content/CycleDiagram.vue',
+    props: ['items: CycleStep[]', 'activeStep?: number = 0', "centerLabel?: string = ''", "caption?: string = ''", 'width?: number = 1400'],
+    slots: ['default', 'center'],
+    code: `<CycleDiagram
+  :items="steps"
+  :active-step="1"
+  center-label="Repeat"
+  caption="Continuous improvement cycle"
+>
+  Each result informs the next iteration.
+</CycleDiagram>`,
+  },
+  {
     id: 'flow-diagram',
     name: 'FlowDiagram',
     category: 'diagram',

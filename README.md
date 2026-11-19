@@ -35,7 +35,7 @@ npm run build:offline
 
 ## 在线组件库
 
-GitHub Pages 展示站：[https://daemonwalker.github.io/SlideCraft/](https://daemonwalker.github.io/SlideCraft/)。可浏览全部 25 个布局与内容组件，查看真实画布预览、Props、Slots 和示例代码，并切换中文、日文和英文。
+GitHub Pages 展示站：[https://daemonwalker.github.io/SlideCraft/](https://daemonwalker.github.io/SlideCraft/)。可浏览全部 26 个布局与内容组件，查看真实画布预览、Props、Slots 和示例代码，并切换中文、日文和英文。
 
 本地启动展示站或生成 Pages 构建：
 
