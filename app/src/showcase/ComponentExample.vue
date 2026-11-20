@@ -287,6 +287,7 @@ const diffLines: DiffLine[] = [
 
     <ExampleFlow
       v-else-if="componentId === 'example-flow'"
+      variant="unified"
       :input-code="flowInput"
       input-language="json"
       :input-caption="t('showcase.examples.exampleFlowInput')"

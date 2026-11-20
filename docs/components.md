@@ -306,7 +306,7 @@ interface CodeHighlightRange {
 
 ### ExampleFlow
 
-以三段等宽代码区域和连接箭头表达“输入 → 处理 → 输出”，也可切换为纵向排列。每段默认复用 `CodeBlock`，内容超高时在段内滚动。
+以三段代码区域和连接箭头表达“输入 → 处理 → 输出”。`panels` 使用独立的横向或纵向面板；`unified` 将三项放入同一外框，标题与正文共用三列网格，箭头位于前两列标题的分隔线上，并按 `0.9fr 1.2fr 0.9fr` 分配宽度。每段默认复用 `CodeBlock`，内容超高时在段内滚动。
 
 | Prop | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -319,13 +319,15 @@ interface CodeHighlightRange {
 | `outputCode` | `string` | 必填 | 输出结果文本 |
 | `outputLanguage` | `string` | `'json'` | 输出段语言标签与着色规则 |
 | `outputCaption` | `string` | `''` | 输出段标签 |
-| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | 横向或纵向排列 |
+| `variant` | `'panels' \| 'unified'` | `'panels'` | 独立面板或一体化三段式管线 |
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | `panels` 模式的横向或纵向排列 |
 | `ariaLabel` | `string` | `''` | 整体区域的无障碍名称 |
 
 Slots：`input`、`transform`、`output`，分别覆盖对应段的默认 `CodeBlock`，可放入表格、图形等自定义内容。caption 和无障碍名称由使用方通过字典传入，组件不内置观众文案。
 
 ```vue
 <ExampleFlow
+  variant="unified"
   :input-code="input"
   input-language="json"
   :input-caption="t('deck.slides.example.input')"
