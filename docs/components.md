@@ -287,12 +287,80 @@ import practiceFile from '../../../assets/attachments/practice.zip?attachment'
 | `caption` | `string` | `''` | 左上角说明或文件路径 |
 | `showLineNumbers` | `boolean` | `false` | 是否显示行号 |
 | `highlightLines` | `number[]` | `[]` | 需要强调的实际行号 |
+| `highlightRanges` | `CodeHighlightRange[]` | `[]` | 需要强调的行内字符范围 |
 | `errorLines` | `number[]` | `[]` | 需要标记为错误的实际行号 |
 | `startLine` | `number` | `1` | 第一行的行号 |
 | `wrap` | `boolean` | `true` | 是否自动换行；关闭后显示横向滚动条 |
 | `syntax` | `boolean` | `true` | 是否启用轻量级语法着色 |
 
-语法着色由本地分词实现，支持常见开发语言，不依赖第三方高亮库；它不是完整的语言解析器。`highlightLines` 和 `errorLines` 使用包含 `startLine` 偏移后的实际行号。
+```ts
+interface CodeHighlightRange {
+  line: number
+  start: number
+  end: number
+}
+```
+
+语法着色由本地分词实现，支持常见开发语言，不依赖第三方高亮库；它不是完整的语言解析器。`highlightLines`、`highlightRanges.line` 和 `errorLines` 使用包含 `startLine` 偏移后的实际行号。字符范围的 `start`、`end` 是从 0 开始的列偏移，`end` 不包含在范围内。
+
+### ExampleFlow
+
+以三段等宽代码区域和连接箭头表达“输入 → 处理 → 输出”，也可切换为纵向排列。每段默认复用 `CodeBlock`，内容超高时在段内滚动。
+
+| Prop | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `inputCode` | `string` | 必填 | 输入数据文本 |
+| `inputLanguage` | `string` | `'json'` | 输入段语言标签与着色规则 |
+| `inputCaption` | `string` | `''` | 输入段标签 |
+| `transformCode` | `string` | 必填 | 处理步骤文本 |
+| `transformLanguage` | `string` | `''` | 处理段语言标签与着色规则 |
+| `transformCaption` | `string` | `''` | 处理段标签 |
+| `outputCode` | `string` | 必填 | 输出结果文本 |
+| `outputLanguage` | `string` | `'json'` | 输出段语言标签与着色规则 |
+| `outputCaption` | `string` | `''` | 输出段标签 |
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | 横向或纵向排列 |
+| `ariaLabel` | `string` | `''` | 整体区域的无障碍名称 |
+
+Slots：`input`、`transform`、`output`，分别覆盖对应段的默认 `CodeBlock`，可放入表格、图形等自定义内容。caption 和无障碍名称由使用方通过字典传入，组件不内置观众文案。
+
+```vue
+<ExampleFlow
+  :input-code="input"
+  input-language="json"
+  :input-caption="t('deck.slides.example.input')"
+  :transform-code="transform"
+  :transform-caption="t('deck.slides.example.transform')"
+  :output-code="output"
+  output-language="json"
+  :output-caption="t('deck.slides.example.output')"
+  :aria-label="t('deck.slides.example.flowAriaLabel')"
+/>
+```
+
+### DataHighlight
+
+展示保留原始缩进的 JSON / XML 文本，并同时使用整行高亮与 JSON 路径级高亮。路径命中范围包含键和值，支持嵌套对象、`items[0].id` 形式的数组索引以及多行值；未命中、格式不正确的路径或无效 JSON 均静默忽略路径高亮。
+
+| Prop | 类型 | 默认值 | 说明 |
+| --- | --- | --- | --- |
+| `code` | `string` | 必填 | 原始数据文本，不重新格式化 |
+| `language` | `'json' \| 'xml'` | `'json'` | 语言标签与着色规则 |
+| `highlightLines` | `number[]` | `[]` | 需要高亮的实际行号，语义同 `CodeBlock` |
+| `highlightPaths` | `string[]` | `[]` | 需要高亮的 JSON 路径 |
+| `caption` | `string` | `''` | 标题 |
+| `showLineNumbers` | `boolean` | `true` | 是否显示行号 |
+
+路径高亮首版仅适用于 `json`；`xml` 支持代码着色与行级高亮，不解析路径。两种高亮可叠加，组件复用 `CodeBlock` 的语法着色、行号、换行和滚动策略。
+
+```vue
+<DataHighlight
+  :code="data"
+  language="json"
+  :highlight-paths="['user.address.city', 'items[0].id']"
+  :highlight-lines="[2]"
+  :caption="t('deck.slides.example.dataCaption')"
+/>
+```
 
 ### CodeDiff
 

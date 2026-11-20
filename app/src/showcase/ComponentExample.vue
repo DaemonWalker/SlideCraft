@@ -12,7 +12,9 @@ import {
   ComparisonLayout,
   ConfigBlock,
   CycleDiagram,
+  DataHighlight,
   DataTable,
+  ExampleFlow,
   FlowDiagram,
   Grid,
   ImageFigure,
@@ -93,6 +95,33 @@ import './styles/global.css'
 
 const app = createApp(App)
 app.mount('#app')`
+
+const flowInput = `{
+  "name": "ada",
+  "tags": ["a", "b"]
+}`
+const flowTransform = `{
+  name: upper(input.name),
+  tagCount: sizeOf(input.tags)
+}`
+const flowOutput = `{
+  "name": "ADA",
+  "tagCount": 2
+}`
+
+const structuredData = `{
+  "user": {
+    "name": "Ada",
+    "address": {
+      "city": "London",
+      "zip": "10001"
+    }
+  },
+  "items": [
+    { "id": 1 },
+    { "id": 2 }
+  ]
+}`
 
 const javascriptCode = `export async function createOrder(request) {
   const response = await api.post('/orders', request)
@@ -253,6 +282,28 @@ const diffLines: DiffLine[] = [
       caption="src/main.ts"
       show-line-numbers
       :highlight-lines="[5]"
+    />
+
+    <ExampleFlow
+      v-else-if="componentId === 'example-flow'"
+      :input-code="flowInput"
+      input-language="json"
+      :input-caption="t('showcase.examples.exampleFlowInput')"
+      :transform-code="flowTransform"
+      :transform-caption="t('showcase.examples.exampleFlowTransform')"
+      :output-code="flowOutput"
+      output-language="json"
+      :output-caption="t('showcase.examples.exampleFlowOutput')"
+      :aria-label="t('showcase.examples.exampleFlowAriaLabel')"
+    />
+
+    <DataHighlight
+      v-else-if="componentId === 'data-highlight'"
+      :code="structuredData"
+      language="json"
+      :highlight-paths="['user.address.city', 'items[0].id', 'foo.bar']"
+      :highlight-lines="[2]"
+      :caption="t('showcase.examples.dataHighlightCaption')"
     />
 
     <CodeDiff

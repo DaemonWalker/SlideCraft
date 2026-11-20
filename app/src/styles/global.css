@@ -16,6 +16,7 @@
   --surface-warning: oklch(0.94 0.04 70);
   --surface-success: oklch(0.93 0.035 165);
   --surface-danger: oklch(0.94 0.035 18);
+  --surface-highlight: color-mix(in oklch, var(--accent-on-dark) 22%, transparent);
 
   --ink: oklch(0.27 0.045 240);
   --ink-muted: oklch(0.39 0.035 240);

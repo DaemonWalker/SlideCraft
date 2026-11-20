@@ -200,7 +200,7 @@ export const componentCatalog: ComponentCatalogItem[] = [
     name: 'CodeBlock',
     category: 'media',
     source: 'content/CodeBlock.vue',
-    props: ['code: string', "language?: string = ''", "caption?: string = ''", 'showLineNumbers?: boolean = false', 'highlightLines?: number[] = []', 'errorLines?: number[] = []', 'startLine?: number = 1', 'wrap?: boolean = true', 'syntax?: boolean = true'],
+    props: ['code: string', "language?: string = ''", "caption?: string = ''", 'showLineNumbers?: boolean = false', 'highlightLines?: number[] = []', 'highlightRanges?: CodeHighlightRange[] = []', 'errorLines?: number[] = []', 'startLine?: number = 1', 'wrap?: boolean = true', 'syntax?: boolean = true'],
     slots: [],
     code: `<CodeBlock
   :code="source"
@@ -208,6 +208,40 @@ export const componentCatalog: ComponentCatalogItem[] = [
   caption="src/main.ts"
   show-line-numbers
   :highlight-lines="[3]"
+/>`,
+  },
+  {
+    id: 'example-flow',
+    name: 'ExampleFlow',
+    category: 'media',
+    source: 'content/ExampleFlow.vue',
+    props: ['inputCode: string', "inputLanguage?: string = 'json'", "inputCaption?: string = ''", 'transformCode: string', "transformLanguage?: string = ''", "transformCaption?: string = ''", 'outputCode: string', "outputLanguage?: string = 'json'", "outputCaption?: string = ''", "direction?: 'horizontal' | 'vertical' = 'horizontal'", "ariaLabel?: string = ''"],
+    slots: ['input', 'transform', 'output'],
+    code: `<ExampleFlow
+  :input-code="input"
+  input-language="json"
+  input-caption="Input"
+  :transform-code="transform"
+  transform-caption="Transform"
+  :output-code="output"
+  output-language="json"
+  output-caption="Output"
+  aria-label="Data transformation example"
+/>`,
+  },
+  {
+    id: 'data-highlight',
+    name: 'DataHighlight',
+    category: 'media',
+    source: 'content/DataHighlight.vue',
+    props: ['code: string', "language?: 'json' | 'xml' = 'json'", 'highlightLines?: number[] = []', 'highlightPaths?: string[] = []', "caption?: string = ''", 'showLineNumbers?: boolean = true'],
+    slots: [],
+    code: `<DataHighlight
+  :code="data"
+  language="json"
+  :highlight-paths="['user.address.city', 'items[0].id']"
+  :highlight-lines="[2]"
+  caption="Example data"
 />`,
   },
   {
