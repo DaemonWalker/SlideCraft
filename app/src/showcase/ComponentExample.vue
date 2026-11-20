@@ -46,11 +46,18 @@ import viewportDiagram from '../assets/viewport-diagram.svg'
 import attachmentExample from '../assets/attachments/slidecraft-example.txt?attachment'
 import { useI18n } from '../i18n'
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   componentId: string
   name: string
   dark?: boolean
-}>()
+  exampleFlowVariant?: 'panels' | 'unified'
+  exampleFlowDirection?: 'horizontal' | 'vertical'
+  exampleFlowShowInput?: boolean
+}>(), {
+  exampleFlowVariant: 'unified',
+  exampleFlowDirection: 'horizontal',
+  exampleFlowShowInput: true,
+})
 
 const { t, tm } = useI18n()
 const isCover = computed(() => ['title-layout', 'section-layout'].includes(props.componentId))
@@ -287,8 +294,9 @@ const diffLines: DiffLine[] = [
 
     <ExampleFlow
       v-else-if="componentId === 'example-flow'"
-      variant="unified"
-      :input-code="flowInput"
+      :variant="exampleFlowVariant"
+      :direction="exampleFlowDirection"
+      :input-code="exampleFlowShowInput ? flowInput : undefined"
       input-language="json"
       :input-caption="t('showcase.examples.exampleFlowInput')"
       :transform-code="flowTransform"

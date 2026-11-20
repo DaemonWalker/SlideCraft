@@ -9,10 +9,16 @@ import { componentCatalog, componentCategories, findComponent } from './catalog'
 import type { ComponentCategory } from './catalog'
 
 const repositoryUrl = 'https://github.com/DaemonWalker/SlideCraft'
+
 const { locale, t } = useI18n()
 const query = ref('')
 const copiedKind = ref('')
 const failedKind = ref('')
+const exampleFlowVariants = ['unified', 'panels'] as const
+const exampleFlowDirections = ['horizontal', 'vertical'] as const
+const exampleFlowVariant = ref<(typeof exampleFlowVariants)[number]>('unified')
+const exampleFlowDirection = ref<(typeof exampleFlowDirections)[number]>('horizontal')
+const exampleFlowShowInput = ref(true)
 let copyTimer: ReturnType<typeof setTimeout> | undefined
 
 const idFromHash = () => {
@@ -26,6 +32,17 @@ const selectedIndex = computed(() => componentCatalog.findIndex((item) => item.i
 const previousComponent = computed(() => componentCatalog[(selectedIndex.value - 1 + componentCatalog.length) % componentCatalog.length])
 const nextComponent = computed(() => componentCatalog[(selectedIndex.value + 1) % componentCatalog.length])
 const sourceUrl = computed(() => `${repositoryUrl}/blob/main/app/src/components/${selected.value.source}`)
+const usageCode = computed(() => {
+  if (selected.value.id !== 'example-flow') return selected.value.code
+  const direction = exampleFlowDirection.value === 'vertical' ? '\n  direction="vertical"' : ''
+  const input = exampleFlowShowInput.value
+    ? '\n  :input-code="input"\n  input-language="json"\n  input-caption="Input"'
+    : ''
+  return selected.value.code.replace(
+    '<ExampleFlow\n',
+    `<ExampleFlow\n  variant="${exampleFlowVariant.value}"${direction}${input}\n`,
+  )
+})
 const normalizedQuery = computed(() => query.value.trim().toLocaleLowerCase())
 const filteredComponents = computed(() => componentCatalog.filter((item) => {
   if (!normalizedQuery.value) return true
@@ -161,10 +178,57 @@ onUnmounted(() => {
         </section>
 
         <section class="showcase-panel showcase-preview" aria-labelledby="preview-title">
-          <header class="showcase-panel__header">
+          <header class="showcase-panel__header showcase-panel__header--inline">
             <div>
               <h2 id="preview-title">{{ t('showcase.preview') }}</h2>
               <p>{{ t('showcase.previewHint') }}</p>
+            </div>
+            <div v-if="selected.id === 'example-flow'" class="showcase-preview__options">
+              <div
+                class="showcase-preview__controls"
+                role="group"
+                :aria-label="t('showcase.previewVariant')"
+              >
+                <button
+                  v-for="variant in exampleFlowVariants"
+                  :key="variant"
+                  class="showcase-preview__control"
+                  :class="{ 'showcase-preview__control--active': exampleFlowVariant === variant }"
+                  type="button"
+                  :aria-pressed="exampleFlowVariant === variant"
+                  @click="exampleFlowVariant = variant"
+                >
+                  {{ t(`showcase.exampleFlowVariants.${variant}`) }}
+                </button>
+              </div>
+              <div
+                class="showcase-preview__controls"
+                role="group"
+                :aria-label="t('showcase.previewDirection')"
+              >
+                <button
+                  v-for="direction in exampleFlowDirections"
+                  :key="direction"
+                  class="showcase-preview__control"
+                  :class="{ 'showcase-preview__control--active': exampleFlowDirection === direction }"
+                  type="button"
+                  :aria-pressed="exampleFlowDirection === direction"
+                  @click="exampleFlowDirection = direction"
+                >
+                  {{ t(`showcase.exampleFlowDirections.${direction}`) }}
+                </button>
+              </div>
+              <div class="showcase-preview__controls">
+                <button
+                  class="showcase-preview__control"
+                  :class="{ 'showcase-preview__control--active': exampleFlowShowInput }"
+                  type="button"
+                  :aria-pressed="exampleFlowShowInput"
+                  @click="exampleFlowShowInput = !exampleFlowShowInput"
+                >
+                  {{ t('showcase.exampleFlowInputToggle') }}
+                </button>
+              </div>
             </div>
           </header>
           <div class="showcase-preview__stage">
@@ -174,6 +238,9 @@ onUnmounted(() => {
                 :component-id="selected.id"
                 :name="selected.name"
                 :dark="selected.dark"
+                :example-flow-variant="exampleFlowVariant"
+                :example-flow-direction="exampleFlowDirection"
+                :example-flow-show-input="exampleFlowShowInput"
               />
             </SlideViewport>
           </div>
@@ -183,13 +250,13 @@ onUnmounted(() => {
           <section class="showcase-panel showcase-usage" aria-labelledby="usage-title">
             <header class="showcase-panel__header showcase-panel__header--inline">
               <h2 id="usage-title">{{ t('showcase.usage') }}</h2>
-              <button class="showcase-icon-button" type="button" :aria-label="t('showcase.copyCode')" :title="t('showcase.copyCode')" @click="copyText(selected.code, 'code')">
+              <button class="showcase-icon-button" type="button" :aria-label="t('showcase.copyCode')" :title="t('showcase.copyCode')" @click="copyText(usageCode, 'code')">
                 <Check v-if="copiedKind === 'code'" :size="16" aria-hidden="true" />
                 <Copy v-else :size="16" aria-hidden="true" />
                 <span>{{ copiedKind === 'code' ? t('showcase.copied') : failedKind === 'code' ? t('showcase.copyFailed') : t('showcase.copyCode') }}</span>
               </button>
             </header>
-            <pre class="showcase-code"><code>{{ selected.code }}</code></pre>
+            <pre class="showcase-code"><code>{{ usageCode }}</code></pre>
           </section>
 
           <section class="showcase-panel showcase-api" aria-labelledby="api-title">
@@ -549,6 +616,49 @@ onUnmounted(() => {
   gap: 16px;
 }
 
+.showcase-preview .showcase-panel__header {
+  flex-wrap: wrap;
+}
+
+.showcase-preview__options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.showcase-preview__controls {
+  display: flex;
+  flex: none;
+  gap: 3px;
+  padding: 3px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control);
+  background: var(--surface-muted);
+}
+
+.showcase-preview__control {
+  min-height: 32px;
+  padding: 6px 10px;
+  border-radius: var(--radius-control);
+  color: var(--ink-muted);
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.showcase-preview__control:hover {
+  color: var(--accent);
+  background: var(--surface-accent);
+}
+
+.showcase-preview__control--active {
+  color: var(--accent);
+  background: var(--surface-accent);
+  box-shadow: inset 0 0 0 1px var(--line-strong);
+}
+
 .showcase-preview__stage {
   height: min(62vh, 650px);
   min-height: 370px;
@@ -770,6 +880,24 @@ onUnmounted(() => {
     overflow: auto;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+  }
+
+  .showcase-preview .showcase-panel__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .showcase-preview__options {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .showcase-preview__controls {
+    flex: 1;
+  }
+
+  .showcase-preview__control {
+    flex: 1;
   }
 
   .showcase-preview__stage {

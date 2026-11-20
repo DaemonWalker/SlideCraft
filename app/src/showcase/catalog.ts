@@ -215,13 +215,9 @@ export const componentCatalog: ComponentCatalogItem[] = [
     name: 'ExampleFlow',
     category: 'media',
     source: 'content/ExampleFlow.vue',
-    props: ['inputCode: string', "inputLanguage?: string = 'json'", "inputCaption?: string = ''", 'transformCode: string', "transformLanguage?: string = ''", "transformCaption?: string = ''", 'outputCode: string', "outputLanguage?: string = 'json'", "outputCaption?: string = ''", "variant?: 'panels' | 'unified' = 'panels'", "direction?: 'horizontal' | 'vertical' = 'horizontal'", "ariaLabel?: string = ''"],
+    props: ['inputCode?: string', "inputLanguage?: string = 'json'", "inputCaption?: string = ''", 'transformCode: string', "transformLanguage?: string = ''", "transformCaption?: string = ''", 'outputCode: string', "outputLanguage?: string = 'json'", "outputCaption?: string = ''", "variant?: 'panels' | 'unified' = 'panels'", "direction?: 'horizontal' | 'vertical' = 'horizontal'", "ariaLabel?: string = ''"],
     slots: ['input', 'transform', 'output'],
     code: `<ExampleFlow
-  variant="unified"
-  :input-code="input"
-  input-language="json"
-  input-caption="Input"
   :transform-code="transform"
   transform-caption="Transform"
   :output-code="output"

@@ -306,11 +306,11 @@ interface CodeHighlightRange {
 
 ### ExampleFlow
 
-以三段代码区域和连接箭头表达“输入 → 处理 → 输出”。`panels` 使用独立的横向或纵向面板；`unified` 将三项放入同一外框，标题与正文共用三列网格，箭头位于前两列标题的分隔线上，并按 `0.9fr 1.2fr 0.9fr` 分配宽度。每段默认复用 `CodeBlock`，内容超高时在段内滚动。
+以代码区域和连接箭头表达“输入 → 处理 → 输出”，也可省略输入，只展示“处理 → 输出”。`panels` 使用独立面板；`unified` 将各阶段放入同一外框。两种形式都支持横向和纵向排列：横向箭头位于阶段之间的纵向分隔线上，纵向箭头位于水平分隔线上。`unified` 横向包含输入时按 `0.9fr 1.2fr 0.9fr` 分配宽度，无输入时按 `1.2fr 1fr` 分配。每段默认复用 `CodeBlock`，内容超高时在段内滚动。
 
 | Prop | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
-| `inputCode` | `string` | 必填 | 输入数据文本 |
+| `inputCode` | `string` | 无 | 可选输入数据文本；未提供且无 `input` Slot 时省略输入段，显式传入空字符串会保留空输入段 |
 | `inputLanguage` | `string` | `'json'` | 输入段语言标签与着色规则 |
 | `inputCaption` | `string` | `''` | 输入段标签 |
 | `transformCode` | `string` | 必填 | 处理步骤文本 |
@@ -319,18 +319,16 @@ interface CodeHighlightRange {
 | `outputCode` | `string` | 必填 | 输出结果文本 |
 | `outputLanguage` | `string` | `'json'` | 输出段语言标签与着色规则 |
 | `outputCaption` | `string` | `''` | 输出段标签 |
-| `variant` | `'panels' \| 'unified'` | `'panels'` | 独立面板或一体化三段式管线 |
-| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | `panels` 模式的横向或纵向排列 |
+| `variant` | `'panels' \| 'unified'` | `'panels'` | 独立面板或一体化管线 |
+| `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | 两种形式共用的横向或纵向排列方向 |
 | `ariaLabel` | `string` | `''` | 整体区域的无障碍名称 |
 
-Slots：`input`、`transform`、`output`，分别覆盖对应段的默认 `CodeBlock`，可放入表格、图形等自定义内容。caption 和无障碍名称由使用方通过字典传入，组件不内置观众文案。
+Slots：`input`、`transform`、`output`，分别覆盖对应段的默认 `CodeBlock`，可放入表格、图形等自定义内容。提供 `input` Slot 时，即使没有 `inputCode` 也会显示输入段。caption 和无障碍名称由使用方通过字典传入，组件不内置观众文案。
 
 ```vue
 <ExampleFlow
   variant="unified"
-  :input-code="input"
-  input-language="json"
-  :input-caption="t('deck.slides.example.input')"
+  direction="vertical"
   :transform-code="transform"
   :transform-caption="t('deck.slides.example.transform')"
   :output-code="output"
