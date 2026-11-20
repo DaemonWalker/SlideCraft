@@ -153,6 +153,7 @@ const diffLines: DiffLine[] = [
     :title="isCover ? '' : name"
     :eyebrow="t('showcase.examples.eyebrow')"
     :footer="t('showcase.examples.footer')"
+    :content-align="componentId === 'cycle-diagram' ? 'start' : 'center'"
   >
     <TwoColumn v-if="componentId === 'two-column'" ratio="1.1fr 0.9fr" :gap="48">
       <template #left>
@@ -368,6 +369,7 @@ const diffLines: DiffLine[] = [
       :active-step="2"
       :center-label="t('showcase.examples.cycleCenter')"
       :caption="t('showcase.examples.cycleCaption')"
+      :width="1800"
     >
       {{ t('showcase.examples.cycleConclusion') }}
     </CycleDiagram>
