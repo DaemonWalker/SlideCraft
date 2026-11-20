@@ -17,9 +17,9 @@ export const componentCatalog: ComponentCatalogItem[] = [
     name: 'TwoColumn',
     category: 'layout',
     source: 'layout/TwoColumn.vue',
-    props: ["ratio?: string = '1fr 1fr'", 'gap?: number = 48', "align?: 'start' | 'center' | 'stretch' = 'center'"],
+    props: ["ratio?: string = '1fr 1fr'", 'gap?: number = 48', "align?: 'start' | 'center' | 'stretch' = 'center'", 'scrollable?: boolean = false'],
     slots: ['left', 'right'],
-    code: `<TwoColumn ratio="1.2fr 0.8fr" :gap="64">
+    code: `<TwoColumn ratio="1.2fr 0.8fr" :gap="64" scrollable>
   <template #left><BulletList :items="items" /></template>
   <template #right><ImageFigure :src="image" alt="Diagram" /></template>
 </TwoColumn>`,

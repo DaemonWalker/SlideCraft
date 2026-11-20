@@ -35,7 +35,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       diagram: '图形组件',
     },
     components: {
-      'two-column': '用可调整比例和间距的两列网格组织图文或对照内容。',
+      'two-column': '用可调整比例和间距的两列网格组织图文或对照内容，可开启列内滚动以展示长内容。',
       grid: '以 2、3 或 4 个等宽列排列卡片及其他内容。',
       stack: '按一致的纵向间距组合任意内容。',
       'title-layout': '用于深色封面的非对称标题、标签和视觉内容布局。',
@@ -214,7 +214,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       diagram: 'ダイアグラム',
     },
     components: {
-      'two-column': '比率と間隔を調整できる 2 カラムで、画像とテキストや比較内容を配置します。',
+      'two-column': '比率と間隔を調整できる 2 カラムで、画像とテキストや比較内容を配置します。長い内容は列内スクロールも有効にできます。',
       grid: 'カードなどを 2、3、4 つの等幅カラムに配置します。',
       stack: '一定の縦方向の間隔で任意の内容を組み合わせます。',
       'title-layout': 'ダークな表紙向けの非対称なタイトル、タグ、ビジュアルレイアウトです。',
@@ -393,7 +393,7 @@ export const showcaseMessages: Record<Locale, MessageTree> = {
       diagram: 'Diagrams',
     },
     components: {
-      'two-column': 'Organize visual explanations or comparisons in two columns with adjustable ratios and spacing.',
+      'two-column': 'Organize visual explanations or comparisons in two columns with adjustable ratios and spacing, with optional scrolling within each column for long content.',
       grid: 'Arrange cards and other content in two, three, or four equal-width columns.',
       stack: 'Combine arbitrary content with consistent vertical spacing.',
       'title-layout': 'An asymmetric title, tag, and visual layout for dark cover slides.',

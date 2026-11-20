@@ -155,7 +155,7 @@ const diffLines: DiffLine[] = [
     :footer="t('showcase.examples.footer')"
     :content-align="componentId === 'cycle-diagram' ? 'start' : 'center'"
   >
-    <TwoColumn v-if="componentId === 'two-column'" ratio="1.1fr 0.9fr" :gap="48">
+    <TwoColumn v-if="componentId === 'two-column'" ratio="1.1fr 0.9fr" :gap="48" scrollable>
       <template #left>
         <Card :title="t('showcase.examples.cardTitle')" tone="accent">
           <BulletList :items="bullets" />

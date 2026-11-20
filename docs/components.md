@@ -45,8 +45,9 @@ Slots：
 | `ratio` | `string` | `'1fr 1fr'` | 直接作为 `grid-template-columns` 的两列比例 |
 | `gap` | `number` | `48` | 列间距，单位 px |
 | `align` | `'start' \| 'center' \| 'stretch'` | `'center'` | 两列内容对齐方式 |
+| `scrollable` | `boolean` | `false` | 是否填满可用高度并允许两列各自滚动；开启时按 `stretch` 对齐 |
 
-Slots：`left`、`right`。
+Slots：`left`、`right`。`scrollable` 适用于高度受限的容器，滚动区域为整个列单元格。
 
 ```vue
 <TwoColumn ratio="1.2fr 0.8fr" :gap="64">
