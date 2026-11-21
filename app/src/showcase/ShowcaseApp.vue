@@ -19,6 +19,7 @@ const exampleFlowDirections = ['horizontal', 'vertical'] as const
 const exampleFlowVariant = ref<(typeof exampleFlowVariants)[number]>('unified')
 const exampleFlowDirection = ref<(typeof exampleFlowDirections)[number]>('horizontal')
 const exampleFlowShowInput = ref(true)
+const exampleFlowShowArrows = ref(true)
 let copyTimer: ReturnType<typeof setTimeout> | undefined
 
 const idFromHash = () => {
@@ -35,12 +36,15 @@ const sourceUrl = computed(() => `${repositoryUrl}/blob/main/app/src/components/
 const usageCode = computed(() => {
   if (selected.value.id !== 'example-flow') return selected.value.code
   const direction = exampleFlowDirection.value === 'vertical' ? '\n  direction="vertical"' : ''
+  const arrows = exampleFlowVariant.value === 'unified' && !exampleFlowShowArrows.value
+    ? '\n  :show-arrows="false"'
+    : ''
   const input = exampleFlowShowInput.value
     ? '\n  :input-code="input"\n  input-language="json"\n  input-caption="Input"'
     : ''
   return selected.value.code.replace(
     '<ExampleFlow\n',
-    `<ExampleFlow\n  variant="${exampleFlowVariant.value}"${direction}${input}\n`,
+    `<ExampleFlow\n  variant="${exampleFlowVariant.value}"${direction}${arrows}${input}\n`,
   )
 })
 const normalizedQuery = computed(() => query.value.trim().toLocaleLowerCase())
@@ -218,6 +222,17 @@ onUnmounted(() => {
                   {{ t(`showcase.exampleFlowDirections.${direction}`) }}
                 </button>
               </div>
+              <div v-if="exampleFlowVariant === 'unified'" class="showcase-preview__controls">
+                <button
+                  class="showcase-preview__control"
+                  :class="{ 'showcase-preview__control--active': exampleFlowShowArrows }"
+                  type="button"
+                  :aria-pressed="exampleFlowShowArrows"
+                  @click="exampleFlowShowArrows = !exampleFlowShowArrows"
+                >
+                  {{ t('showcase.exampleFlowArrowToggle') }}
+                </button>
+              </div>
               <div class="showcase-preview__controls">
                 <button
                   class="showcase-preview__control"
@@ -241,6 +256,7 @@ onUnmounted(() => {
                 :example-flow-variant="exampleFlowVariant"
                 :example-flow-direction="exampleFlowDirection"
                 :example-flow-show-input="exampleFlowShowInput"
+                :example-flow-show-arrows="exampleFlowShowArrows"
               />
             </SlideViewport>
           </div>

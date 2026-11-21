@@ -15,6 +15,7 @@ const props = withDefaults(defineProps<{
   outputCaption?: string
   variant?: 'panels' | 'unified'
   direction?: 'horizontal' | 'vertical'
+  showArrows?: boolean
   ariaLabel?: string
 }>(), {
   inputLanguage: 'json',
@@ -25,6 +26,7 @@ const props = withDefaults(defineProps<{
   outputCaption: '',
   variant: 'panels',
   direction: 'horizontal',
+  showArrows: true,
   ariaLabel: '',
 })
 
@@ -36,15 +38,17 @@ const hasInput = computed(() => props.inputCode !== undefined || Boolean(slots.i
   <section
     v-if="variant === 'unified'"
     class="example-flow example-flow--unified"
-    :class="[`example-flow--${direction}`, { 'example-flow--with-input': hasInput }]"
+    :class="[`example-flow--${direction}`, { 'example-flow--with-input': hasInput, 'example-flow--with-arrows': showArrows }]"
     :aria-label="ariaLabel || undefined"
   >
     <div v-if="hasInput" class="example-flow__unified-stage">
       <div class="example-flow__unified-heading">
         <span>{{ inputCaption }}</span>
         <strong>{{ inputLanguage }}</strong>
-        <ArrowDown v-if="direction === 'vertical'" class="example-flow__unified-arrow" :size="20" aria-hidden="true" />
-        <ArrowRight v-else class="example-flow__unified-arrow" :size="20" aria-hidden="true" />
+        <template v-if="showArrows">
+          <ArrowDown v-if="direction === 'vertical'" class="example-flow__unified-arrow" :size="20" aria-hidden="true" />
+          <ArrowRight v-else class="example-flow__unified-arrow" :size="20" aria-hidden="true" />
+        </template>
       </div>
       <div class="example-flow__stage example-flow__unified-body">
         <slot name="input">
@@ -56,8 +60,10 @@ const hasInput = computed(() => props.inputCode !== undefined || Boolean(slots.i
       <div class="example-flow__unified-heading">
         <span>{{ transformCaption }}</span>
         <strong>{{ transformLanguage }}</strong>
-        <ArrowDown v-if="direction === 'vertical'" class="example-flow__unified-arrow" :size="20" aria-hidden="true" />
-        <ArrowRight v-else class="example-flow__unified-arrow" :size="20" aria-hidden="true" />
+        <template v-if="showArrows">
+          <ArrowDown v-if="direction === 'vertical'" class="example-flow__unified-arrow" :size="20" aria-hidden="true" />
+          <ArrowRight v-else class="example-flow__unified-arrow" :size="20" aria-hidden="true" />
+        </template>
       </div>
       <div class="example-flow__stage example-flow__unified-body">
         <slot name="transform">
@@ -182,7 +188,7 @@ const hasInput = computed(() => props.inputCode !== undefined || Boolean(slots.i
   font-size: 16px;
 }
 
-.example-flow--horizontal > .example-flow__unified-stage:not(:last-child) .example-flow__unified-heading {
+.example-flow--with-arrows.example-flow--horizontal > .example-flow__unified-stage:not(:last-child) .example-flow__unified-heading {
   padding-right: 36px;
 }
 

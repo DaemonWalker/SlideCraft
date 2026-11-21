@@ -306,7 +306,7 @@ interface CodeHighlightRange {
 
 ### ExampleFlow
 
-以代码区域和连接箭头表达“输入 → 处理 → 输出”，也可省略输入，只展示“处理 → 输出”。`panels` 使用独立面板；`unified` 将各阶段放入同一外框。两种形式都支持横向和纵向排列：横向箭头位于阶段之间的纵向分隔线上，纵向箭头位于水平分隔线上。`unified` 横向包含输入时按 `0.9fr 1.2fr 0.9fr` 分配宽度，无输入时按 `1.2fr 1fr` 分配。每段默认复用 `CodeBlock`，内容超高时在段内滚动。
+以代码区域和连接箭头表达“输入 → 处理 → 输出”，也可省略输入，只展示“处理 → 输出”。`panels` 使用独立面板；`unified` 将各阶段放入同一外框。两种形式都支持横向和纵向排列：横向箭头位于阶段之间的纵向分隔线上，纵向箭头位于水平分隔线上。`unified` 可通过 `showArrows: false` 隐藏箭头，并移除标题栏的箭头预留空间。`unified` 横向包含输入时按 `0.9fr 1.2fr 0.9fr` 分配宽度，无输入时按 `1.2fr 1fr` 分配。每段默认复用 `CodeBlock`，内容超高时在段内滚动。
 
 | Prop | 类型 | 默认值 | 说明 |
 | --- | --- | --- | --- |
@@ -321,6 +321,7 @@ interface CodeHighlightRange {
 | `outputCaption` | `string` | `''` | 输出段标签 |
 | `variant` | `'panels' \| 'unified'` | `'panels'` | 独立面板或一体化管线 |
 | `direction` | `'horizontal' \| 'vertical'` | `'horizontal'` | 两种形式共用的横向或纵向排列方向 |
+| `showArrows` | `boolean` | `true` | `unified` 模式是否显示阶段连接箭头 |
 | `ariaLabel` | `string` | `''` | 整体区域的无障碍名称 |
 
 Slots：`input`、`transform`、`output`，分别覆盖对应段的默认 `CodeBlock`，可放入表格、图形等自定义内容。提供 `input` Slot 时，即使没有 `inputCode` 也会显示输入段。caption 和无障碍名称由使用方通过字典传入，组件不内置观众文案。
@@ -329,6 +330,7 @@ Slots：`input`、`transform`、`output`，分别覆盖对应段的默认 `CodeB
 <ExampleFlow
   variant="unified"
   direction="vertical"
+  :show-arrows="false"
   :transform-code="transform"
   :transform-caption="t('deck.slides.example.transform')"
   :output-code="output"

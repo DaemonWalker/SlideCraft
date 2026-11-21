@@ -53,10 +53,12 @@ const props = withDefaults(defineProps<{
   exampleFlowVariant?: 'panels' | 'unified'
   exampleFlowDirection?: 'horizontal' | 'vertical'
   exampleFlowShowInput?: boolean
+  exampleFlowShowArrows?: boolean
 }>(), {
   exampleFlowVariant: 'unified',
   exampleFlowDirection: 'horizontal',
   exampleFlowShowInput: true,
+  exampleFlowShowArrows: true,
 })
 
 const { t, tm } = useI18n()
@@ -296,6 +298,7 @@ const diffLines: DiffLine[] = [
       v-else-if="componentId === 'example-flow'"
       :variant="exampleFlowVariant"
       :direction="exampleFlowDirection"
+      :show-arrows="exampleFlowShowArrows"
       :input-code="exampleFlowShowInput ? flowInput : undefined"
       input-language="json"
       :input-caption="t('showcase.examples.exampleFlowInput')"
